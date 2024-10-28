@@ -35,8 +35,3 @@ func is_triggered(_input : InputPackage) -> bool:
 
 # The Combos code is a module for creating additional layers of conditional transitions that can be
 # added, mixed, copied and deleted without your base check_relevance function changing a symbol.
-
-
-
-
-
