@@ -1,9 +1,13 @@
-extends Node
+extends Resource
 class_name Combo
 
 
-@onready var move : Move 
+var move : Move
 @export var triggered_move : String
+
+
+func init():
+	pass
 
 
 func is_triggered(_input : InputPackage) -> bool:

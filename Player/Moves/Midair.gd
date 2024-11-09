@@ -5,17 +5,34 @@ var jump_direction : Vector3
 
 var landing_height : float = 1.163
 
+func translate_input_actions(input : InputPackage) -> InputPackage:
+	var input_to_moves : Dictionary = {
+		"move" : "run",
+		"move_fast" : "sprint",
+		"midair" : "midair",
+		"beam_walk" : "beam_walk"
+	}
+	
+	if input.movement_actions.has("go_up") and area_awareness.eligible_for_wall_jump():
+		input.actions.append("jump_wall")
+	
+	for action in input_to_moves.keys():
+		if input.movement_actions.has(action):
+			input.actions.append(input_to_moves[action])
+	
+	return input
 
-func default_lifecycle(_input : InputPackage):
-	var floor_distance = area_awareness.get_floor_distance()
-	if floor_distance < landing_height:
+# TODO refactor, I don't like growing branching, we can do better with priorities
+func default_lifecycle(input : InputPackage):
+	
+	if area_awareness.is_on_floor():
 		var xz_velocity = player.velocity
 		xz_velocity.y = 0
 		if xz_velocity.length_squared() >= 10:
 			return "landing_sprint"
 		return "landing_run"
 	else:
-		return "okay"
+		return best_input_that_can_be_paid(input)
 
 
 func update(_input : InputPackage, delta ):

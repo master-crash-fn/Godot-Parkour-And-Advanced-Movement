@@ -38,3 +38,9 @@ func get_right_weapon_hurts(animation : String, timecode : float) -> bool:
 
 func tracks_input_vector(animation : String, timecode : float) -> bool:
 	return move_database.get_boolean_value(animation, "MoveDatabase:tracks_input_vector", timecode)
+
+func get_movement_mode(animation : String, timecode : float):
+	var data = move_database.get_animation(animation)
+	var track = data.find_track("../../AreaAwareness:current_mode", Animation.TYPE_VALUE)
+	return data.value_track_interpolate(track, timecode)
+	

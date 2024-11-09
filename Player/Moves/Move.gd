@@ -24,7 +24,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
 @export var stamina_cost : float = 0
 
-@onready var combos : Array[Combo] 
+@export_group("combos")
+@export var combos : Array[Combo] 
 
 var enter_state_time : float
 var initial_position : Vector3
@@ -38,7 +39,10 @@ var forced_move : String = "nonexistent forced move, drop error please"
 
 var DURATION : float
 
+#region Transition Logic
 func check_relevance(input : InputPackage) -> String:
+	input = translate_input_actions(input)
+	
 	if accepts_queueing():
 		check_combos(input)
 	
@@ -70,12 +74,61 @@ func best_input_that_can_be_paid(input : InputPackage) -> String:
 				return action
 	return "throwing because for some reason input.actions doesn't contain even idle"  
 
+# "default-default", works for animations that just linger
+func default_lifecycle(input : InputPackage):
+	if works_longer_than(DURATION):
+		return best_input_that_can_be_paid(input)
+	return "okay"
 
+
+func _on_enter_state():
+	initial_position = player.global_position
+	resources.pay_resource_cost(self)
+	mark_enter_state()
+	on_enter_state()
+	animator.update_body_animations()
+
+func on_enter_state():
+	pass
+
+func _on_exit_state():
+	on_exit_state()
+
+func on_exit_state():
+	pass
+
+func try_force_move(new_forced_move : String):
+	if not has_forced_move:
+		has_forced_move = true
+		forced_move = new_forced_move
+	elif container.moves[new_forced_move].priority > container.moves[forced_move].priority:
+		forced_move = new_forced_move
+
+# This method is only here to document the default route,
+# it is expected to be often overriden by Move heirs to customise the flows.
+func translate_input_actions(input : InputPackage) -> InputPackage:
+	var input_to_moves : Dictionary = {
+		"move" : "run",
+		"move_fast" : "sprint",
+		"go_up" : "jump_run",
+		"midair" : "midair",
+		"beam_walk" : "beam_walk"
+	}
+	
+	for action in input_to_moves.keys():
+		if input.movement_actions.has(action):
+			input.actions.append(input_to_moves[action])
+	
+	return input
+
+
+#endregion
+
+#region Update Logic
 func _update(input : InputPackage, delta : float):
 	if tracks_input_vector():
 		process_input_vector(input, delta)
 	update(input, delta)
-
 
 func update(_input : InputPackage, _delta : float):
 	pass
@@ -84,11 +137,16 @@ func process_input_vector(input : InputPackage, delta : float):
 	var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
-	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+	var new_z = player.basis.z.rotated(Vector3.UP, clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+	var new_x = -new_z.cross(Vector3.UP)
+	player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
+	#player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
 
 func update_resources(delta : float):
 	resources.update(delta)
+#endregion
 
+#region Time Measurement
 
 func mark_enter_state():
 	enter_state_time = Time.get_unix_time_from_system()
@@ -112,7 +170,9 @@ func works_between(start : float, finish : float) -> bool:
 	if progress >= start and progress <= finish:
 		return true
 	return false
+#endregion
 
+#region Backend Animation Getters
 func transitions_to_queued() -> bool:
 	return moves_data_repo.get_transitions_to_queued(backend_animation, get_progress())
 
@@ -142,34 +202,14 @@ func get_root_position_delta(delta_time : float) -> Vector3:
 func right_weapon_hurts() -> bool:
 	return moves_data_repo.get_right_weapon_hurts(backend_animation, get_progress())
 
-# "default-default", works for animations that just linger
-func default_lifecycle(input : InputPackage):
-	if works_longer_than(DURATION):
-		return best_input_that_can_be_paid(input)
-	return "okay"
-
-
-func _on_enter_state():
-	initial_position = player.global_position
-	resources.pay_resource_cost(self)
-	mark_enter_state()
-	on_enter_state()
-	animator.update_body_animations()
-
-func on_enter_state():
-	pass
-
-func _on_exit_state():
-	on_exit_state()
-
-func on_exit_state():
-	pass
+func get_movement_mode():
+	return moves_data_repo.get_movement_mode(backend_animation, get_progress())
+#endregion
 
 func assign_combos():
-	for child in get_children():
-		if child is Combo:
-			combos.append(child)
-			child.move = self
+	for combo in combos:
+		combo.move = self
+		combo.init()
 
 
 func form_hit_data(_weapon : Weapon) -> HitData:
@@ -193,11 +233,3 @@ func react_on_hit(hit : HitData):
 
 func react_on_parry(_hit : HitData):
 	try_force_move("parried")
-
-
-func try_force_move(new_forced_move : String):
-	if not has_forced_move:
-		has_forced_move = true
-		forced_move = new_forced_move
-	elif container.moves[new_forced_move].priority >= container.moves[forced_move].priority:
-		forced_move = new_forced_move
