@@ -64,7 +64,6 @@ transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, -20.8537
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 
@@ -150,18 +149,18 @@ shape = SubResource("BoxShape3D_t88bb")
 [node name="Path3D" type="Path3D" parent="MarkedLedge"]
 curve = SubResource("Curve3D_q7hrp")
 
-[node name="MarkedLedge" parent="MarkedLedge" node_paths=PackedStringArray("curve") instance=ExtResource("4_00fd4")]
-transform = Transform3D(0.811585, 0, 0.584236, 0, 1, 0, -0.584236, 0, 0.811585, -1.35824, 0.63701, -2.75402)
+[node name="MarkedLedge2" parent="." node_paths=PackedStringArray("curve") instance=ExtResource("4_00fd4")]
+transform = Transform3D(0.999394, 0, 0.0348294, 0, 1, 0, -0.0348294, 0, 0.999394, 2.89511, 2.13959, -6.80776)
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 curve = NodePath("Path3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MarkedLedge/MarkedLedge"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MarkedLedge2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0853307, 0, 0.127692)
 shape = SubResource("BoxShape3D_t88bb")
 
-[node name="Path3D" type="Path3D" parent="MarkedLedge/MarkedLedge"]
+[node name="Path3D" type="Path3D" parent="MarkedLedge2"]
 curve = SubResource("Curve3D_q7hrp")
 
 [node name="ProtoBeam" parent="." node_paths=PackedStringArray("start", "end") instance=ExtResource("4_bupgl")]

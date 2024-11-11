@@ -13,8 +13,8 @@ func rotate_player(delta : float):
 	var climb_direction : Vector3 = vertical_axis.direction_to(area_awareness.ledge_climbing_point)
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(climb_direction, Vector3.UP)
-	if abs(angle) > 0.01 and get_progress() < 0.9667:
-		player.rotate_y(angle / 10)
+	if abs(angle) > 0.001 and get_progress() < 0.9667:
+		player.rotate_y(angle / 8)
 
 func move_player(delta : float):
 	var delta_pos = get_root_position_delta(delta)
@@ -33,7 +33,7 @@ func on_enter_state():
 	print(height)
 
 
-func on_exit_state():
-	var height = area_awareness.get_floor_distance() - area_awareness.on_floor_height + 0.2
-	if height < 0:
-		player.global_position.y -= height
+#func on_exit_state():
+	#var height = area_awareness.get_floor_distance() - area_awareness.on_floor_height + 0.2
+	#if height < 0:
+		#player.global_position.y -= height

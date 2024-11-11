@@ -5,6 +5,8 @@ var last_pushback_vector : Vector3
 var last_wall_jump_normal : Vector3
 var last_input_package : InputPackage
 
+@export var asdf : Transform3D
+
 # This is the primary ray to scan the surface beneath us
 # Default root position in T-pos is 1.042 meters high and 0.932 meters in current idle pose
 # Due to CharacterBody3D's is_on_floor having unwanted consequences and not being customisable enough,
@@ -27,9 +29,9 @@ var on_floor_height : float = 1
 
 
 
-enum MovementMode { FLOOR, AIR, LEDGE, BEAM }
-# we export it to be able to include into MovesDatabase animation player as a track
-@export var current_mode : MovementMode = MovementMode.FLOOR
+#enum MovementMode { FLOOR, AIR, LEDGE, BEAM }
+## we export it to be able to include into MovesDatabase animation player as a track
+#@export var current_mode : MovementMode = MovementMode.FLOOR
 
 var current_beam : ProtoBeam
 var last_beam_fall : float = 0

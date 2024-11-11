@@ -17,6 +17,7 @@ func update(_input : InputPackage, _delta : float):
 
 
 func process_input_vector(input : InputPackage, delta : float):
+	var y_speed = player.velocity.y
 	var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
@@ -27,14 +28,10 @@ func process_input_vector(input : InputPackage, delta : float):
 		player.velocity = player.basis.z * TURN_SPEED
 	else:
 		player.velocity = player.basis.z * SPEED
-	
-	#if abs(angle) >= tracking_angular_speed * delta:
-		#player.velocity = face_direction.rotated(Vector3.UP, sign(angle) * tracking_angular_speed * delta) * TURN_SPEED
-		#player.rotate_y(sign(angle) * tracking_angular_speed * delta)
-	#else:
-		#player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
-		#player.rotate_y(angle)
-	#animator.set_speed_scale(player.velocity.length() / SPEED)
+	if area_awareness.get_floor_distance() > 0.8:
+		y_speed -= gravity * delta
+	player.velocity.y = y_speed
+
 
 
 func on_exit_state():
