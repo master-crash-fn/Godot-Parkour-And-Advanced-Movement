@@ -22,7 +22,7 @@ func translate_input_actions(input : InputPackage) -> InputPackage:
 	
 	return input
 
-# TODO refactor, I don't like growing branching, we can do better with priorities
+
 func default_lifecycle(input : InputPackage):
 	
 	if area_awareness.is_on_floor():

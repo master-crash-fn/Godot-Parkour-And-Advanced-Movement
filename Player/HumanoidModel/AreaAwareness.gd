@@ -7,6 +7,8 @@ var last_input_package : InputPackage
 
 @export var asdf : Transform3D
 
+enum Area {FLOOR, AIR, WATER, SWAMP, LEDGE}
+
 # This is the primary ray to scan the surface beneath us
 # Default root position in T-pos is 1.042 meters high and 0.932 meters in current idle pose
 # Due to CharacterBody3D's is_on_floor having unwanted consequences and not being customisable enough,

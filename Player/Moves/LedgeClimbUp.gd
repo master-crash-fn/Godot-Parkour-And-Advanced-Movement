@@ -33,7 +33,7 @@ func on_enter_state():
 	print(height)
 
 
-#func on_exit_state():
-	#var height = area_awareness.get_floor_distance() - area_awareness.on_floor_height + 0.2
-	#if height < 0:
-		#player.global_position.y -= height
+func on_exit_state():
+	var height = area_awareness.get_floor_distance() - area_awareness.on_floor_height + 0.2
+	if height < 0:
+		player.global_position.y -= height

@@ -28,8 +28,10 @@ albedo_color = Color(1, 0.113725, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bmwg"]
 albedo_texture = ExtResource("3_ruxjn")
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip2nn"]
+albedo_color = Color(0.988138, 0.431483, 1, 1)
 albedo_texture = ExtResource("3_ruxjn")
 uv1_triplanar = true
 
@@ -46,7 +48,7 @@ point_count = 2
 [node name="ProtoLevel" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.875464, 0.390984, 0.284066, 0, -0.587785, 0.809017, 0.483282, 0.708266, 0.514585, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -64,6 +66,7 @@ transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, -20.8537
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 
@@ -88,7 +91,7 @@ size = Vector3(2, 2, 2)
 
 [node name="Box3" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, -0.635017, 2.20094)
-material_override = SubResource("StandardMaterial3D_ip2nn")
+material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 10, 2)
@@ -123,7 +126,7 @@ size = Vector3(2, 10, 2)
 
 [node name="Box5" type="CSGBox3D" parent="Box5"]
 transform = Transform3D(0.999999, 6.92904e-07, 0, -6.92904e-07, 0.999999, 0, 0, 0, 1, 9.83251, -4.35941, 8.13815)
-material_override = SubResource("StandardMaterial3D_ip2nn")
+material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 10, 2)
