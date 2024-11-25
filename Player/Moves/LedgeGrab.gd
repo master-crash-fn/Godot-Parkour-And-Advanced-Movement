@@ -3,22 +3,6 @@ extends Move
 var height : float
 var distance : float
 
-# This method is only here to document the default route,
-# it is expected to be often overriden by Move heirs to customise the flows.
-func translate_input_actions(input : InputPackage) -> InputPackage:
-	var input_to_moves : Dictionary = {
-		"move" : "run",
-		"move_fast" : "sprint",
-		"go_up" : "wall_jump",
-		"midair" : "midair",
-		"beam_walk" : "beam_walk"
-	}
-	
-	for action in input_to_moves.keys():
-		if input.movement_actions.has(action):
-			input.actions.append(input_to_moves[action])
-	
-	return input
 
 func default_lifecycle(input : InputPackage):
 	return "okay"

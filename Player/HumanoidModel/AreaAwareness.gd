@@ -5,9 +5,9 @@ var last_pushback_vector : Vector3
 var last_wall_jump_normal : Vector3
 var last_input_package : InputPackage
 
-@export var asdf : Transform3D
-
 enum Area {FLOOR, AIR, WATER, SWAMP, LEDGE}
+
+@onready var space : PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 
 # This is the primary ray to scan the surface beneath us
 # Default root position in T-pos is 1.042 meters high and 0.932 meters in current idle pose
@@ -25,15 +25,8 @@ var on_floor_height : float = 1
 @onready var resources = $"../Resources" as HumanoidResources
 @onready var states = $"../States" as HumanoidStates
 
-@onready var overhead_sensor_1 = $OverheadSensor1 as Area3D
-@onready var overhead_sensor_2 = $OverheadSensor2 as Area3D
-@onready var before_chest_sensor = $BeforeChestSensor as Area3D
-
-
-
-#enum MovementMode { FLOOR, AIR, LEDGE, BEAM }
-## we export it to be able to include into MovesDatabase animation player as a track
-#@export var current_mode : MovementMode = MovementMode.FLOOR
+@onready var area_sensor = $AreaSensor as Area3D
+@onready var area_sensor_collider = $AreaSensor/AreaSensorCollider
 
 var current_beam : ProtoBeam
 var last_beam_fall : float = 0
@@ -42,11 +35,39 @@ var beam_cooldown : float = 0.2
 var current_ledge : MarkedLedge
 var ledge_climbing_point : Vector3
 
+@export var ray_slice : RaySlice
+var ray_slice_start : Vector3 = Vector3(0, 0.9, 0.16)
+@onready var slice_cast = $ShapeCast3D as ShapeCast3D
+@onready var slice = $Area3D/Slice as CollisionShape3D
+@onready var slice_plane : Plane 
+var plane_1 : Vector3
+var plane_2 : Vector3
+var plane_3 : Vector3
+var edge_1 : Vector3
+var edge_2 : Vector3
+#var dot_hor : float
+#var dot_ver : float
+var normal : Vector3
+var normal_1 : Vector3
+var normal_2 : Vector3
+
+
+@export_group("cringe")
+@export var pointers : Array[CSGSphere3D]
+
+var benchmark_start : float
+#var benchmark_sum : float = 0
+#var benchmarl_frames : int = 0
+
 # We don't have a lot of forced contexts here, but they have a shared formula,
 # essentially, a forced context can be formulated as "floor is [something]".
 # Currently we just push another action to movement actions,
 # but I can see the future where it becomes an enum field in area awareness, just "what is the floor here".
 func add_context(input : InputPackage) -> InputPackage:
+	benchmark_start = Time.get_ticks_usec()
+	search_for_edges()
+	#search_for_edges_2()
+	print(Time.get_ticks_usec() - benchmark_start)
 	if feel_beam():
 		input.movement_actions.append("beam_walk")
 		current_beam = downcast_2.get_collider()
@@ -88,88 +109,86 @@ func get_floor_distance() -> float:
 	return 999999
 
 
-func can_climb_ledge(area : MarkedLedge) -> bool:
-	var points = area.get_curve_points()
-	var minimal_altitude : Vector3 = Vector3(99999999, 99999999, 99999999) # dirty, TODO idk
-	var found_suitable_altitude : bool = false
-	for i in points.size() - 1:
-		var delta = points[i + 1] - points[i]
-		var reduced_player_pos = model.player.global_position - points[i]
-		var altitude_point = reduced_player_pos.project(delta)
-		# if vectors are not opposite and altitude_point is shorter than delta,
-		# i.e. if altitude from player_pos is landing between points[i] and points[i+1]
-		if altitude_point.length_squared() < delta.length_squared() and altitude_point.dot(delta) > 0:
-			var altitude = altitude_point - reduced_player_pos
-			if altitude.length_squared() < minimal_altitude.length_squared():
-				minimal_altitude = altitude
-				found_suitable_altitude = true
-	if found_suitable_altitude:
-		current_ledge = area
-		ledge_climbing_point = minimal_altitude + model.player.global_position
-		$test_marker.global_position = ledge_climbing_point
-		print("sensed a marked ledge")
-		return true
-	return false
+# This variation is for face_data as {normal : edges}, it will throw in current build, change LocationElement
+func search_for_edges():
+	var ray_slice_res = ray_slice.scan(global_transform * ray_slice_start, global_basis.z, space)
+	if not ray_slice_res.is_empty():
+		var collider = ray_slice_res["collider"]
+		if collider is LocationElement:
+			plane_1 = global_transform * ray_slice_start
+			plane_2 = global_transform * ray_slice_start + global_basis.z * ray_slice.depth
+			plane_3 = global_transform * ray_slice_start + Vector3.UP * ray_slice.height
+			pointers[0].global_position = plane_1
+			pointers[1].global_position = plane_2
+			pointers[2].global_position = plane_3
+			normal = ray_slice_res["normal"]
+			var edge : PackedVector3Array = collider.has_climbable_edge(normal, plane_1, plane_2, plane_3)
+			if not edge.is_empty():
+				$test_marker.global_position = collider.global_transform * edge[2]
+			else:
+				$test_marker.global_position = Vector3.ZERO
 
-# TODO refactor into 3d rectangle check maybe?
-func can_climb_dynamic_ledge() -> bool:
-	var space_state = get_world_3d().direct_space_state
-	var origin : Vector3 = global_position + Vector3(0, 1.7, 0) # lowest point of static ledges collider also
-	var end : Vector3 = origin + model.player.basis.z * 0.43
-	var query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-	var result = space_state.intersect_ray(query)
-	#$test_marker.global_position = result["position"]
-	if not result.is_empty():
-		var normal : Vector3 = result["normal"]
-		var distance : Vector3= origin - result["position"]
-		#end = origin - (origin - result["position"]).reflect(normal)
-		end = result["position"] + normal.rotated(Vector3.UP, (PI / 2) * sign(normal.signed_angle_to(distance, Vector3.UP)) ) * 0.5
-		#$test_marker.global_position = end
-		query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-		result = space_state.intersect_ray(query)
-		if not result.is_empty():
-			end = origin - normal * distance.length() * cos(normal.angle_to(distance)) * 1.2
-			#$test_marker.global_position = end
-			origin = end + Vector3(0, 1.2, 0)
-			#$test_marker.global_position = origin
-			query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-			result = space_state.intersect_ray(query)
-			if not result.is_empty():
-				ledge_climbing_point = result["position"]
-				$test_marker.global_position = ledge_climbing_point
-				print("dynamically sensed a ledge")
-				return true
-	return false
 
-func can_grab_dynamic_ledge() -> bool:
-	var space_state = get_world_3d().direct_space_state
-	var origin : Vector3 = global_position + Vector3(0, 1.426, 0) 
-	var end : Vector3 = origin + model.player.basis.z * 0.629
-	var query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-	var result = space_state.intersect_ray(query)
-	if not result.is_empty():
-		var normal : Vector3 = result["normal"]
-		var distance : Vector3= origin - result["position"]
-		#end = origin - (origin - result["position"]).reflect(normal)
-		end = result["position"] + normal.rotated(Vector3.UP, (PI / 2) * sign(normal.signed_angle_to(distance, Vector3.UP)) ) * 0.5
-		#$test_marker.global_position = end
-		query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-		result = space_state.intersect_ray(query)
-		if not result.is_empty():
-			end = origin - normal * distance.length() * cos(normal.angle_to(distance)) * 1.2
-			#$test_marker.global_position = end
-			origin = end + Vector3(0, 0.3, 0)
-			#$test_marker.global_position = origin
-			query = PhysicsRayQueryParameters3D.create(origin, end, 1)
-			result = space_state.intersect_ray(query)
-			if not result.is_empty():
-				ledge_climbing_point = result["position"]
-				$test_marker.global_position = ledge_climbing_point
-				return true
-	return false
+# shell of the past to use as a demonstration of shapecasts being meh
+func search_for_edges_2():
+	slice_cast.force_shapecast_update()
+	if slice_cast.is_colliding():
+		var start : Vector3 = slice_cast.global_position
+		start.y = slice_cast.get_collision_point(0).y - 0.01
+		var end : Vector3 = slice_cast.get_collision_point(0)
+		end = start + start.direction_to(end) * 1.5
+		var request : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start, end, 2)
+		var results : Dictionary = space.intersect_ray(request)
+		if not results.is_empty():
+			pass
+
+
+func search_for_edges_3():
+	var ray_slice_res = ray_slice.scan(global_transform * ray_slice_start, global_basis.z, space)
+	if not ray_slice_res.is_empty():
+		var collider = ray_slice_res["collider"]
+		if collider is LocationElement:
+			plane_1 = global_transform * ray_slice_start
+			plane_2 = global_transform * ray_slice_start + global_basis.z * ray_slice.depth
+			plane_3 = global_transform * ray_slice_start + Vector3.UP * ray_slice.height
+			pointers[0].global_position = plane_1
+			pointers[1].global_position = plane_2
+			pointers[2].global_position = plane_3
+			var plane : Plane = Plane(plane_1,plane_2,plane_3)
+			var vis_i = 0
+			for edge in collider.edges_angles:
+				var intersection = plane.intersects_segment(collider.global_transform * edge[0],collider.global_transform * edge[1])
+				if intersection:
+					#print(intersection)
+					if vis_i < 24:
+						pointers[vis_i].global_position = intersection
+					vis_i += 1
+
+
+
+
+
+
+@export var surfaces_detector : CollisionShape3D
+var surfaces_result : Array
+var surfaces_request : PhysicsShapeQueryParameters3D
+func look_for_surfaces():
+	surfaces_result.clear()
+	surfaces_request = PhysicsShapeQueryParameters3D.new()
+	surfaces_request.shape = surfaces_detector.shape
+	surfaces_request.collision_mask = 2
+	surfaces_request.transform = surfaces_detector.global_transform
 	
-	
-	
-	
-	
-	
+	var result = space.collide_shape(surfaces_request, 10)
+	for i in result.size() / 2:
+		surfaces_result.append(result[ 2*i + 1 ])
+		print(result[ 2*i + 1 ])
+	#print(surfaces_result)
+	print("---------------")
+	#var possible_edges : Array = deduplicate_array(surfaces_result.filter(func(vector): return surfaces_result.count(vector) > 1))
+
+	#visualization
+	for pointer in pointers:
+		pointer.global_position = Vector3.ZERO
+	for i in surfaces_result.size():
+		pointers[i].global_position = surfaces_result[i]

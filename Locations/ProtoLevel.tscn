@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=17 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://Assets/Textures/texture_09.png" id="3_ruxjn"]
 [ext_resource type="PackedScene" uid="uid://bv646civv7b6f" path="res://Locations/MarkedLedge.tscn" id="4_00fd4"]
 [ext_resource type="PackedScene" uid="uid://m4d0u4x4rby6" path="res://Locations/ProtoBeam.tscn" id="4_bupgl"]
+[ext_resource type="PackedScene" uid="uid://ddarx8liglmbm" path="res://Assets/Models/monkey with curve as mesh.glb" id="7_rcw0k"]
+[ext_resource type="PackedScene" uid="uid://cbt38th5ck45j" path="res://Assets/Models/untitled.glb" id="9_7r3qk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,6 +22,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xdhy"]
+albedo_color = Color(0, 0, 0, 1)
 albedo_texture = ExtResource("1_m20ri")
 uv1_triplanar = true
 
@@ -59,10 +62,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -4.37151)
 material_override = SubResource("StandardMaterial3D_4xdhy")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(50, 1, 30)
 
 [node name="Player" parent="." instance=ExtResource("1_86wwi")]
-transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, -20.8537, 9.11006, -12.3628)
+transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, 21.1018, 9.11006, -2.93826)
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
@@ -90,10 +94,11 @@ collision_mask = 0
 size = Vector3(2, 2, 2)
 
 [node name="Box3" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, -0.635017, 2.20094)
+transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, 0.532928, 2.20094)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(2, 10, 2)
 
 [node name="Box8" type="CSGBox3D" parent="."]
@@ -101,6 +106,7 @@ transform = Transform3D(0.999998, 2.77161e-06, 0, -2.77161e-06, 0.999998, 0, 0, 
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(2, 10, 2)
 
 [node name="Box7" type="CSGBox3D" parent="."]
@@ -108,6 +114,7 @@ transform = Transform3D(0.999998, 2.07871e-06, 0, -2.07871e-06, 0.999998, 0, 0, 
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(2, 10, 2)
 
 [node name="Box6" type="CSGBox3D" parent="."]
@@ -115,6 +122,7 @@ transform = Transform3D(0.999999, 1.38581e-06, 0, -1.38581e-06, 0.999999, 0, 0, 
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(2, 10, 2)
 
 [node name="Box5" type="CSGBox3D" parent="."]
@@ -122,10 +130,12 @@ transform = Transform3D(0.999999, 6.92904e-07, 0, -6.92904e-07, 0.999999, 0, 0, 
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(2, 10, 2)
 
 [node name="Box5" type="CSGBox3D" parent="Box5"]
 transform = Transform3D(0.999999, 6.92904e-07, 0, -6.92904e-07, 0.999999, 0, 0, 0, 1, 9.83251, -4.35941, 8.13815)
+layers = 3
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
@@ -136,6 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.6687, 7.8023, -13.1589)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
+collision_mask = 0
 size = Vector3(5, 2, 5)
 
 [node name="MarkedLedge" parent="." node_paths=PackedStringArray("curve") instance=ExtResource("4_00fd4")]
@@ -180,3 +191,23 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 8.75443e-08, 1, -1.11759e-
 
 [node name="end" type="Node3D" parent="ProtoBeam"]
 transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-08, 3.8743e-07, 2.23517e-08, 1, 4.0702, 0.0996771, -0.00278711)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.24, 1.35, -2.88)
+
+[node name="StaticBody3D" parent="." instance=ExtResource("9_7r3qk")]
+transform = Transform3D(0.700665, 0.182626, -0.689723, -0.191374, 0.979369, 0.0649087, 0.687347, 0.0865158, 0.721159, 11.9941, 0.348272, 5.27356)
+
+[node name="StaticBody3D3" parent="." instance=ExtResource("9_7r3qk")]
+transform = Transform3D(0.832109, 0, -0.554612, 0, 1, 0, 0.554612, 0, 0.832109, 12.4337, -0.5, -1.51834)
+
+[node name="StaticBody3D4" parent="." instance=ExtResource("9_7r3qk")]
+transform = Transform3D(0.983207, 0, 0.182493, 0.124872, 0.729243, -0.672764, -0.133082, 0.684254, 0.716997, 17.9079, 1.17942, -3.83438)
+
+[node name="StaticBody3D2" parent="." instance=ExtResource("7_rcw0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6323, -1.55525, 4.79453)
+
+[node name="Suzanne" parent="StaticBody3D2" index="0"]
+visible = false
+
+[editable path="StaticBody3D2"]

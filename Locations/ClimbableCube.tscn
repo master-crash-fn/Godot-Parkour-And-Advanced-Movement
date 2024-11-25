@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=4 uid="uid://p4k74stes0l6"]
+
+[ext_resource type="Script" path="res://Locations/LocationElement.gd" id="1_kis8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fptg5"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i45q6"]
+resource_name = "cube with bones_Cube"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("AAAgPwAAAD8AACA/AAAAPwAAID8AAAA/AADAPgAAAD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAgD4AACA/AACAPgAAID8AAIA+AADAPgAAgD4AAMA+AACAPgAAwD4AAIA+AAAgPwAAQD8AAGA/AAAAPwAAID8AAEA/AADAPgAAQD8AAAA+AAAAPwAAwD4AAEA/AAAgPwAAAAAAAGA/AACAPgAAID8AAIA/AADAPgAAAAAAAAA+AACAPgAAwD4AAIA/24sQPwAAAADbixA/AACAPxvzCj8AAAA/G/MKPwAAAD+AKAk/AACAPoAoCT8AAIA+OUEBP6wvjj4j5PU+ZM2hPmiZ8j50a70+nqn1Pkr62j6S/AA/dsf0PgAAID8jNh8/IjY/PwAAAD8AACA/OJvKPZqsRj8AAIA+"),
+"bone_aabbs": [AABB(-1, 0, -1, 2.00001, 2.00001, 2), AABB(-1, 1.28619, 1, 2, 0.230888, 1.00136e-05), AABB(1, 0.790614, -1, 1.00136e-05, 0.551572, 2), AABB(-0.208569, 2, -1, 0.233221, 1.00136e-05, 2)],
+"format": 34359745559,
+"index_count": 96,
+"index_data": PackedByteArray("AQAmACQAAQAHACYACQAYABwACQAVABgAEQAZABcAGQAOABQAGQARAA4AEAAKAAQAEAAWAAoABQAiABsABQAhACIAHgALAB0AHwALAB4ACwAhAAUAIAALAB8AIQALACAAAwAMAA8AIwAaAAAAAwAjAAwAIwADABoAEgAcABgAHAAlAAYAHAASACUACAAeAB0AHgAgAB8AIAAiACEAIgACABsAAgAeAAgAHgAiACAAHgACACIAJgANACQAJgATAA0A"),
+"lods": [1e-10, PackedByteArray("AQAmACQAAQAHACYAJgANACQAJgATAA0ACQAYABwACQAVABgAEgAcABgAHAASACUAHAAlAAYAEQAZABcAGQARAA4AGQAOABQAEAAKAAQAEAAWAAoAAwAMAA8AAwAjAAwAIwADABoAIwAaAAAAHQAFAAsAHQAbAAUAHQACABsAAgAdAAgA")],
+"material": SubResource("StandardMaterial3D_fptg5"),
+"name": "Material",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAABAAAAAAD/f/9/AAAAAAAAAQAAAAAA/3//fwAAAAAAAAIAAAAAAP9//38AAAAAAAACAAAAAAD/f/9/AAAAAAAAAQACAAAAVVVVVVVVAAAAAAEAAgAAAFVVVVVVVQAAAAACAAAAAAD/f/9/AAAAAAAAAgAAAAAA/3//fwAAAAAAAAIAAAAAAP9//38AAAAAAAACAAAAAAD/f/9/AAAAAAAAAgAAAAAA/3//fwAAAAAAAAMAAAAAAP9//38AAAAAAAADAAAAAAD/f/9/AAAAAAAAAwAAAAAA/3//fwAAAAAAAAMAAAAAAP9//38AAAAA"),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 39,
+"vertex_data": PackedByteArray("AACAPwAAAEAAAIC/AACAPwAAAEAAAIC/AACAPwAAAEAAAIC/AACAPwAAAAAAAIC/AACAPwAAAAAAAIC/AACAPwAAAAAAAIC/AACAPwAAAEAAAIA/AACAPwAAAEAAAIA/AACAPwAAAEAAAIA/AACAPwAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAAAAAAIA/AACAvwAAAEAAAIC/AACAvwAAAEAAAIC/AACAvwAAAEAAAIC/AACAvwAAAAAAAIC/AACAvwAAAAAAAIC/AACAvwAAAAAAAIC/AACAvwAAAEAAAIA/AACAvwAAAEAAAIA/AACAvwAAAEAAAIA/AACAvwAAAAAAAIA/AACAvwAAAAAAAIA/AACAvwAAAAAAAIA/AACAv2svwj8AAIA/AACAv2svwj8AAIA/AACAP23Mqz8AAIC/AACAP23Mqz8AAIC/AACAPwKipD8AAIA/AACAPwKipD8AAIA/AACAP+UEhT9QQUc/AACAP4qQVz/YlPE+AACAP6hlSj9sIyU9AACAP3SmVj9Q0te+AACAP0zygz/UHVO/QN3JPAAAAEAAAIC/QN3JPAAAAEAAAIC/IJNVvgAAAEAAAIA/IJNVvgAAAEAAAIA///////9/////f///AAD/v////3//f/////////9/////fwAA////v////3//f////3//f/9/////f///AAD/v////3//f////3//f/9/////fwAA////v////3//f/////////9/////f///AAD/vwAA/3//f/////////9/////fwAA////vwAA/3//f////3//f/9/////f///AAD/vwAA/3//f////3//f/9/////fwAA////vwAA/3//f////3//f/9///8AAP9//3//////////f///////f/9/////f/9//3///////3//f///////f/9///////9//3/+/////3//f/7/////f/9//v////9//3//////////f////3///wAA/7//f/9//3////9///8AAP+/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_bm7ia"]
+resource_name = "Skin"
+bind_count = 4
+bind/0/name = &"nothing"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bind/1/name = &"ledge"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+bind/2/name = &"rope"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.84855, 0)
+bind/3/name = &"beam"
+bind/3/bone = -1
+bind/3/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.72668, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_trtvu"]
+data = PackedVector3Array(1, 2, -1, -0.2086, 2, 1, 0.0246, 2, -1, 1, 2, -1, 1, 2, 1, -0.2086, 2, 1, 1, 0, 1, -1, 1.5171, 1, 1, 1.2862, 1, 1, 0, 1, -1, 0, 1, -1, 1.5171, 1, -1, 0, -1, -1, 1.5171, 1, -1, 0, 1, -1, 1.5171, 1, -1, 2, -1, -1, 2, 1, -1, 1.5171, 1, -1, 0, -1, -1, 2, -1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 0, -1, 1, 1.0308, -0.8247, 1, 1.3422, -1, 1, 0, -1, 1, 0.8385, -0.4215, 1, 1.0308, -0.8247, 1, 1.0392, 0.7783, 1, 0, 1, 1, 1.2862, 1, 1, 0.842, 0.4718, 1, 0, 1, 1, 1.0392, 0.7783, 1, 0, 1, 1, 0.8385, -0.4215, 1, 0, -1, 1, 0.7906, 0.0403, 1, 0, 1, 1, 0.842, 0.4718, 1, 0.8385, -0.4215, 1, 0, 1, 1, 0.7906, 0.0403, 1, 0, -1, -1, 2, -1, -1, 0, -1, 0.0246, 2, -1, 1, 1.3422, -1, 1, 2, -1, 1, 0, -1, 0.0246, 2, -1, -1, 2, -1, 0.0246, 2, -1, 1, 0, -1, 1, 1.3422, -1, -1, 2, 1, 1, 1.2862, 1, -1, 1.5171, 1, 1, 1.2862, 1, -0.2086, 2, 1, 1, 2, 1, 1, 1.2862, 1, -1, 2, 1, -0.2086, 2, 1, 1, 2, 1, 1, 1.0392, 0.7783, 1, 1.2862, 1, 1, 1.0392, 0.7783, 1, 0.7906, 0.0403, 1, 0.842, 0.4718, 1, 0.7906, 0.0403, 1, 1.0308, -0.8247, 1, 0.8385, -0.4215, 1, 1.0308, -0.8247, 1, 2, -1, 1, 1.3422, -1, 1, 2, -1, 1, 1.0392, 0.7783, 1, 2, 1, 1, 1.0392, 0.7783, 1, 1.0308, -0.8247, 1, 0.7906, 0.0403, 1, 1.0392, 0.7783, 1, 2, -1, 1, 1.0308, -0.8247, -0.2086, 2, 1, -1, 2, -1, 0.0246, 2, -1, -0.2086, 2, 1, -1, 2, 1, -1, 2, -1)
+
+[node name="Node3D" type="StaticBody3D"]
+script = ExtResource("1_kis8t")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_i45q6")
+skin = SubResource("Skin_bm7ia")
+skeleton = NodePath("../Skeleton3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_trtvu")
+
+[node name="Skeleton3D" type="Skeleton3D" parent="."]
+bones/0/name = "nothing"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "ledge"
+bones/1/parent = 0
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 1, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "rope"
+bones/2/parent = 1
+bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.848547, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 0.848547, 0)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "beam"
+bones/3/parent = 2
+bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.878131, 0)
+bones/3/enabled = true
+bones/3/position = Vector3(0, 0.878131, 0)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/scale = Vector3(1, 1, 1)
