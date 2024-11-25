@@ -76,7 +76,6 @@ func add_context(input : InputPackage) -> InputPackage:
 	last_input_package = input
 	return input
 
-
 func eligible_for_wall_jump() -> bool:
 	wallcast_1.force_raycast_update()
 	wallcast_2.force_raycast_update()
@@ -108,8 +107,7 @@ func get_floor_distance() -> float:
 		return downcast.global_position.distance_to(downcast.get_collision_point())
 	return 999999
 
-
-# This variation is for face_data as {normal : edges}, it will throw in current build, change LocationElement
+# The final algo 
 func search_for_edges():
 	var ray_slice_res = ray_slice.scan(global_transform * ray_slice_start, global_basis.z, space)
 	if not ray_slice_res.is_empty():
@@ -128,7 +126,6 @@ func search_for_edges():
 			else:
 				$test_marker.global_position = Vector3.ZERO
 
-
 # shell of the past to use as a demonstration of shapecasts being meh
 func search_for_edges_2():
 	slice_cast.force_shapecast_update()
@@ -142,7 +139,7 @@ func search_for_edges_2():
 		if not results.is_empty():
 			pass
 
-
+# a funny iteration that just cross-sections the mesh it coolides with and visualises it
 func search_for_edges_3():
 	var ray_slice_res = ray_slice.scan(global_transform * ray_slice_start, global_basis.z, space)
 	if not ray_slice_res.is_empty():
@@ -164,11 +161,8 @@ func search_for_edges_3():
 						pointers[vis_i].global_position = intersection
 					vis_i += 1
 
-
-
-
-
-
+# this one highlights cringe hallutinations, to use, enable the collision shape under AreaSensor
+# you can play with different areas and embrace the "usefulness" of this approach
 @export var surfaces_detector : CollisionShape3D
 var surfaces_result : Array
 var surfaces_request : PhysicsShapeQueryParameters3D
