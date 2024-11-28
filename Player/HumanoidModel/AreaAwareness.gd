@@ -65,9 +65,9 @@ var benchmark_start : float
 # but I can see the future where it becomes an enum field in area awareness, just "what is the floor here".
 func add_context(input : InputPackage) -> InputPackage:
 	benchmark_start = Time.get_ticks_usec()
-	search_for_edges()
-	#search_for_edges_2()
-	print(Time.get_ticks_usec() - benchmark_start)
+	search_for_edges_3()
+	print("cost: " + str(Time.get_ticks_usec() - benchmark_start) + " microseconds")
+	
 	if feel_beam():
 		input.movement_actions.append("beam_walk")
 		current_beam = downcast_2.get_collider()
@@ -145,6 +145,8 @@ func search_for_edges_3():
 	if not ray_slice_res.is_empty():
 		var collider = ray_slice_res["collider"]
 		if collider is LocationElement:
+			for marker in pointers:
+				marker.global_position = Vector3.ZERO
 			plane_1 = global_transform * ray_slice_start
 			plane_2 = global_transform * ray_slice_start + global_basis.z * ray_slice.depth
 			plane_3 = global_transform * ray_slice_start + Vector3.UP * ray_slice.height
@@ -167,6 +169,9 @@ func search_for_edges_3():
 var surfaces_result : Array
 var surfaces_request : PhysicsShapeQueryParameters3D
 func look_for_surfaces():
+	# in case you want your zone follow the camera angle, not character's nose
+	#surfaces_detector.global_basis = model.player.camera_mount.global_basis
+	
 	surfaces_result.clear()
 	surfaces_request = PhysicsShapeQueryParameters3D.new()
 	surfaces_request.shape = surfaces_detector.shape

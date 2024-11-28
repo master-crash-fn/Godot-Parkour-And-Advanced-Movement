@@ -66,7 +66,7 @@ collision_mask = 0
 size = Vector3(50, 1, 30)
 
 [node name="Player" parent="." instance=ExtResource("1_86wwi")]
-transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, 21.1018, 9.11006, -2.93826)
+transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, 10.0302, 9.11006, 1.73753)
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
@@ -198,11 +198,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.24, 1.35, -2.88)
 [node name="StaticBody3D" parent="." instance=ExtResource("9_7r3qk")]
 transform = Transform3D(0.700665, 0.182626, -0.689723, -0.191374, 0.979369, 0.0649087, 0.687347, 0.0865158, 0.721159, 11.9941, 0.348272, 5.27356)
 
+[node name="Cube" parent="StaticBody3D" index="0"]
+visible = false
+
 [node name="StaticBody3D3" parent="." instance=ExtResource("9_7r3qk")]
 transform = Transform3D(0.832109, 0, -0.554612, 0, 1, 0, 0.554612, 0, 0.832109, 12.4337, -0.5, -1.51834)
 
+[node name="Cube" parent="StaticBody3D3" index="0"]
+visible = false
+
 [node name="StaticBody3D4" parent="." instance=ExtResource("9_7r3qk")]
 transform = Transform3D(0.983207, 0, 0.182493, 0.124872, 0.729243, -0.672764, -0.133082, 0.684254, 0.716997, 17.9079, 1.17942, -3.83438)
+
+[node name="Cube" parent="StaticBody3D4" index="0"]
+visible = false
 
 [node name="StaticBody3D2" parent="." instance=ExtResource("7_rcw0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6323, -1.55525, 4.79453)
@@ -210,4 +219,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6323, -1.55525, 4.79453)
 [node name="Suzanne" parent="StaticBody3D2" index="0"]
 visible = false
 
+[editable path="StaticBody3D"]
+[editable path="StaticBody3D3"]
+[editable path="StaticBody3D4"]
 [editable path="StaticBody3D2"]

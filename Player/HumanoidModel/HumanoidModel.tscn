@@ -77,8 +77,8 @@ points = PackedVector3Array(0, 0, 0.5, 0, 2, 0.5, 0, 2, 0, 0, 0, 0)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hm1y"]
 albedo_color = Color(0, 0.113725, 1, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y3asx"]
-points = PackedVector3Array(0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_slhx6"]
+points = PackedVector3Array(0, 0, 3, 0, 2, 3, 0, 2, 0, 0, 0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agkpj"]
 albedo_color = Color(1, 0, 0, 1)
@@ -4662,11 +4662,13 @@ target_position = Vector3(0, 0, 0.5)
 collision_mask = 2
 
 [node name="Area3D" type="Area3D" parent="AreaAwareness"]
+visible = false
 monitoring = false
 monitorable = false
 
 [node name="Slice" type="CollisionShape3D" parent="AreaAwareness/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.894209, 0.154672)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_1artm")
 
 [node name="Downcast" type="RayCast3D" parent="AreaAwareness"]
@@ -4704,7 +4706,7 @@ monitorable = false
 
 [node name="AreaSensorCollider" type="CollisionShape3D" parent="AreaAwareness/AreaSensor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10442, 0.0258569)
-shape = SubResource("ConvexPolygonShape3D_y3asx")
+shape = SubResource("ConvexPolygonShape3D_slhx6")
 disabled = true
 
 [node name="cringe" type="Node3D" parent="AreaAwareness"]

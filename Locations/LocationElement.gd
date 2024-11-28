@@ -2,8 +2,8 @@ extends StaticBody3D
 class_name LocationElement
 
 #var visual_mesh : MeshInstance3D
-var collision_mesh : MeshInstance3D
-var collision_shape : CollisionShape3D
+@export var collision_mesh : MeshInstance3D
+@export var collision_shape : CollisionShape3D
 
 # tuple of vectors : tuple of vectors
 # first one is edge set up as two vertices
