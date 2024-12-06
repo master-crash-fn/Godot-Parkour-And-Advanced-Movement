@@ -117,7 +117,7 @@ func _map_input_actions(input : InputPackage):
 	for action in default_input_mapping.keys():
 		if input.input_actions.has(action):
 			input.move_names.append(default_input_mapping[action])
-	print(input.move_names)
+	#print(input.move_names)
 	return input
 
 func map_input_actions(input : InputPackage):

@@ -2,8 +2,6 @@ extends Node3D
 class_name AreaAwareness
 
 var last_pushback_vector : Vector3
-var last_wall_jump_normal : Vector3
-
 
 @export var shoulder_width : float = 0.5
 
@@ -23,6 +21,8 @@ var ledge_climbing_point : Vector3
 
 var current_beam : PackedVector3Array
 
+var last_wall_jump_normal : Vector3
+
 var plane_1 : Vector3
 var plane_2 : Vector3
 var plane_3 : Vector3
@@ -36,23 +36,34 @@ var results : Dictionary
 func add_context(input : InputPackage):
 	if search_for_thin_walkable_edge():
 		input.input_actions.append("beam")
-		#print("beeeeam")
 	if not is_on_floor():
 		input.input_actions.append("midair")
 
-
-func eligible_for_wall_jump() -> bool:
-	#wallcast_1.force_raycast_update()
-	#wallcast_2.force_raycast_update()
-	#if wallcast_1.is_colliding():
-		#$test_marker.global_position = wallcast_1.get_collision_point()
-		#last_wall_jump_normal = wallcast_1.get_collision_normal()
-		#return true and resources.can_be_paid(states.get_move_by_name("jump_wall"))
-	#if wallcast_2.is_colliding():
-		#$test_marker.global_position = wallcast_2.get_collision_point()
-		#last_wall_jump_normal = wallcast_2.get_collision_normal()
-		#return true and resources.can_be_paid(states.get_move_by_name("jump_wall"))
-	return false
+# TODO probably refactor into some RaySlice usage?
+func can_wall_jump() -> bool:
+	var trigger : int = 0
+	start = Vector3(0, 0.2, 0)
+	end = Vector3(0, 0.2, 0.3)
+	request = PhysicsRayQueryParameters3D.create(global_transform * start, global_transform * end, 2)
+	results = space.intersect_ray(request)
+	if not results.is_empty():
+		trigger += 1
+		last_wall_jump_normal = results["normal"]
+	start = Vector3(0, 0.87, 0)
+	end = Vector3(0, 0.87, 0.5)
+	request = PhysicsRayQueryParameters3D.create(global_transform * start, global_transform * end, 2)
+	results = space.intersect_ray(request)
+	if not results.is_empty():
+		trigger += 1
+		last_wall_jump_normal = results["normal"]
+	start = Vector3(0, 1.38, 0)
+	end = Vector3(0, 1.38, 0.5)
+	request = PhysicsRayQueryParameters3D.create(global_transform * start, global_transform * end, 2)
+	results = space.intersect_ray(request)
+	if not results.is_empty():
+		trigger += 1
+		last_wall_jump_normal = results["normal"]
+	return trigger > 1
 
 
 func is_on_floor() -> bool:
@@ -62,13 +73,15 @@ func is_on_floor() -> bool:
 func get_floor_distance() -> float:
 	start = global_position + Vector3(0, 1, 0)
 	end = global_position + Vector3(0, -100, 0)
-	request = PhysicsRayQueryParameters3D.create(start, end, 3)
+	request = PhysicsRayQueryParameters3D.create(start, end, 3, [model.player.get_rid()])
 	results = space.intersect_ray(request)
 	if not results.is_empty():
+		#$test_marker.global_position = results["position"]
 		return start.distance_to(results["position"])
 	return 999999
 
 
+# TODO the search probably must be started from character's legs, not from node's zero
 func search_for_thin_walkable_edge() -> bool:
 	start = global_position + Vector3(0, 1, 0)
 	end = global_position + Vector3(0, -0.3, 0)

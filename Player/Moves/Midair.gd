@@ -9,13 +9,16 @@ var landing_height : float = 1.163
 
 
 func map_input_actions(input : InputPackage):
-	if input.input_actions.has("go_up") and area_awareness.eligible_for_wall_jump():
+	if input.input_actions.has("go_up") and area_awareness.can_wall_jump():
 		input.input_actions.erase("go_up")
 		input.move_names.append("jump_wall")
 	
 	if area_awareness.search_for_climbable_edges(ledge_sensor):
 		input.input_actions.erase("midair")
 		input.move_names.append("ledge_grab")
+	
+	if input.input_actions.has("beam_walk"):
+		input.input_actions.erase("midair")
 
 
 func default_lifecycle(input : InputPackage):

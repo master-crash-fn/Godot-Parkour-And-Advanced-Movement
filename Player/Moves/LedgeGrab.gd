@@ -4,14 +4,8 @@ var height : float
 var distance : float
 
 
-func mapping():
-	{
-		
-	}
-
-
 func default_lifecycle(input : InputPackage):
-	return "okay"
+	return best_input_that_can_be_paid(input)
 
 func update(_input : InputPackage, delta : float):
 	rotate_player(delta)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=15 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://Assets/Textures/texture_09.png" id="3_ruxjn"]
 [ext_resource type="PackedScene" uid="uid://qtkhjccxfscx" path="res://Assets/Models/fence_wall.glb" id="6_t55mv"]
+[ext_resource type="PackedScene" uid="uid://b1q2b2tmp1rco" path="res://Assets/Models/thin.glb" id="7_ik8ca"]
 [ext_resource type="PackedScene" uid="uid://ddarx8liglmbm" path="res://Assets/Models/monkey with curve as mesh.glb" id="7_rcw0k"]
 [ext_resource type="PackedScene" uid="uid://cbt38th5ck45j" path="res://Assets/Models/untitled.glb" id="9_7r3qk"]
 
@@ -167,6 +168,9 @@ transform = Transform3D(0.396811, 0, 0.9179, 0, 1, 0, -0.9179, 0, 0.396811, 23.5
 
 [node name="FenceWall" parent="." instance=ExtResource("6_t55mv")]
 transform = Transform3D(-0.0416664, 0, -0.999132, 0, 1, 0, 0.999132, 0, -0.0416664, -0.748516, -0.5, 6.37969)
+
+[node name="StaticBody3D" parent="." instance=ExtResource("7_ik8ca")]
+transform = Transform3D(0.371479, 0.0945253, 0.923617, -0.0352721, 0.995522, -0.0876979, -0.927771, 0, 0.37315, -9.47881, 7.65356, -9.48447)
 
 [editable path="cube1"]
 [editable path="cube2"]
