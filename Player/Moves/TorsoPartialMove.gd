@@ -16,9 +16,9 @@ func _update(input : InputPackage, delta : float):
 	update(input, delta)
 
 
-func _on_enter_state():
+func _on_enter_state(_input : InputPackage):
 	#skeleton.add_torso_correction(x_adjustment, y_adjustment, z_adjustment)
-	super._on_enter_state()
+	super._on_enter_state(_input)
 
 
 func _on_exit_state():

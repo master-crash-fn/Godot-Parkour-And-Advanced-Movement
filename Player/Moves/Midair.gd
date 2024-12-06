@@ -1,30 +1,24 @@
 extends Move
 
+@export var ledge_sensor : RaySlice
+
 @export var DELTA_VECTOR_LENGTH = 6
 var jump_direction : Vector3
 
 var landing_height : float = 1.163
 
-func translate_input_actions(input : InputPackage) -> InputPackage:
-	var input_to_moves : Dictionary = {
-		"move" : "run",
-		"move_fast" : "sprint",
-		"midair" : "midair",
-		"beam_walk" : "beam_walk"
-	}
+
+func map_input_actions(input : InputPackage):
+	if input.input_actions.has("go_up") and area_awareness.eligible_for_wall_jump():
+		input.input_actions.erase("go_up")
+		input.move_names.append("jump_wall")
 	
-	if input.movement_actions.has("go_up") and area_awareness.eligible_for_wall_jump():
-		input.actions.append("jump_wall")
-	
-	for action in input_to_moves.keys():
-		if input.movement_actions.has(action):
-			input.actions.append(input_to_moves[action])
-	
-	return input
+	if area_awareness.search_for_climbable_edges(ledge_sensor):
+		input.input_actions.erase("midair")
+		input.move_names.append("ledge_grab")
 
 
 func default_lifecycle(input : InputPackage):
-	
 	if area_awareness.is_on_floor():
 		var xz_velocity = player.velocity
 		xz_velocity.y = 0
@@ -51,10 +45,10 @@ func process_input_vector(input : InputPackage, delta : float):
 	player.velocity = new_velocity
 
 
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	# the clamp construction is here to 
 	# 1) prevent look_at annoying errors when our velocity is zero and it can't look_at properly
-	# 3) have a way to scale from velocity. The longer the vector is, the harder it is to modify it by adding a delta.
+	# 2) have a way to scale from velocity. The longer the vector is, the harder it is to modify it by adding a delta.
 	#    Scaling jump_direction with velocity is giving us that natural behaviour of faster jumps (sprints)
 	#    being less controllable, and jumps from standing position being more volatile.
 	#    The dependance on velocity paramter is not critical, delete this if you don't like the approach.

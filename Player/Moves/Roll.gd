@@ -27,7 +27,7 @@ func move_player(delta : float):
 # At least one Move currently uses this duplicated call - Parry one, because we can spam parries.
 # so maybe consuming them into base makes sense, but I really don't want another bool export field.
 # TODO revisit&rethink, tech debt certainly
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	animator.reset_torso_animation()
 	animator.reset_legs_animation()
 	

@@ -9,6 +9,7 @@ func _post_import(scene):
 	var collider_mesh = new_location_element.find_child("*-colmesh") as MeshInstance3D
 	collider_mesh.name = collider_mesh.name.replace("-colmesh", "")
 	new_location_element.collision_mesh = collider_mesh
+	collider_mesh.visible = false
 	
 	var collider : CollisionShape3D = CollisionShape3D.new()
 	collider.shape = collider_mesh.mesh.create_trimesh_shape()

@@ -24,8 +24,16 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
 @export var stamina_cost : float = 0
 
-@export_group("combos")
-@export var combos : Array[Combo] 
+@export_group("input mapping")
+@export var default_input_mapping : Dictionary = {
+	"idle" : "idle",
+	"stop" : "idle",
+	"move" : "run",
+	"move_fast" : "sprint",
+	"go_up" : "jump_run",
+	"midair" : "midair",
+	"beam" : "beam_walk",
+}
 
 var enter_state_time : float
 var initial_position : Vector3
@@ -37,15 +45,10 @@ var queued_move : String = "nonexistent queued move, drop error please"
 var has_forced_move : bool = false
 var forced_move : String = "nonexistent forced move, drop error please"
 
-var DURATION : float
+var duration : float
 
 #region Transition Logic
 func check_relevance(input : InputPackage) -> String:
-	input = translate_input_actions(input)
-	
-	if accepts_queueing():
-		check_combos(input)
-	
 	if has_queued_move and transitions_to_queued():
 		try_force_move(queued_move)
 		has_queued_move = false
@@ -54,19 +57,13 @@ func check_relevance(input : InputPackage) -> String:
 		has_forced_move = false
 		return forced_move
 	
+	_map_input_actions(input)
 	return default_lifecycle(input)
 
 
-func check_combos(input : InputPackage):
-	for combo : Combo in combos:
-		if combo.is_triggered(input) and resources.can_be_paid(container.moves[combo.triggered_move]):
-			has_queued_move = true
-			queued_move = combo.triggered_move
-
-
 func best_input_that_can_be_paid(input : InputPackage) -> String:
-	input.actions.sort_custom(container.moves_priority_sort)
-	for action in input.actions:
+	input.move_names.sort_custom(container.moves_priority_sort)
+	for action in input.move_names:
 		if resources.can_be_paid(container.moves[action]):
 			if container.moves[action] == self:
 				return "okay"
@@ -76,19 +73,19 @@ func best_input_that_can_be_paid(input : InputPackage) -> String:
 
 # "default-default", works for animations that just linger
 func default_lifecycle(input : InputPackage):
-	if works_longer_than(DURATION):
+	if works_longer_than(duration):
 		return best_input_that_can_be_paid(input)
 	return "okay"
 
 
-func _on_enter_state():
+func _on_enter_state(input : InputPackage):
 	initial_position = player.global_position
 	resources.pay_resource_cost(self)
 	mark_enter_state()
-	on_enter_state()
+	on_enter_state(input)
 	animator.update_body_animations()
 
-func on_enter_state():
+func on_enter_state(input : InputPackage):
 	pass
 
 func _on_exit_state():
@@ -97,6 +94,17 @@ func _on_exit_state():
 func on_exit_state():
 	pass
 
+func queue_move(new_queued_move : String):
+	queued_move = new_queued_move
+	has_queued_move = true
+
+func try_queue_move(new_queued_move : String):
+	if not has_queued_move:
+		queued_move = new_queued_move
+		has_queued_move = true
+	elif container.moves[new_queued_move].priority > container.moves[queued_move].priority:
+		queued_move = new_queued_move
+
 func try_force_move(new_forced_move : String):
 	if not has_forced_move:
 		has_forced_move = true
@@ -104,23 +112,16 @@ func try_force_move(new_forced_move : String):
 	elif container.moves[new_forced_move].priority > container.moves[forced_move].priority:
 		forced_move = new_forced_move
 
-# This method is only here to document the default route,
-# it is expected to be often overriden by Move heirs to customise the flows.
-func translate_input_actions(input : InputPackage) -> InputPackage:
-	var input_to_moves : Dictionary = {
-		"move" : "run",
-		"move_fast" : "sprint",
-		"go_up" : "jump_run",
-		"midair" : "midair",
-		"beam_walk" : "beam_walk"
-	}
-	
-	for action in input_to_moves.keys():
-		if input.movement_actions.has(action):
-			input.actions.append(input_to_moves[action])
-	
+func _map_input_actions(input : InputPackage):
+	map_input_actions(input)
+	for action in default_input_mapping.keys():
+		if input.input_actions.has(action):
+			input.move_names.append(default_input_mapping[action])
+	print(input.move_names)
 	return input
 
+func map_input_actions(input : InputPackage):
+	pass
 
 #endregion
 
@@ -176,8 +177,8 @@ func works_between(start : float, finish : float) -> bool:
 func transitions_to_queued() -> bool:
 	return moves_data_repo.get_transitions_to_queued(backend_animation, get_progress())
 
-func accepts_queueing() -> bool:
-	return moves_data_repo.get_accepts_queueing(backend_animation, get_progress())
+#func accepts_queueing() -> bool:
+	#return moves_data_repo.get_accepts_queueing(backend_animation, get_progress())
 
 func tracks_input_vector() -> bool:
 	return moves_data_repo.tracks_input_vector(backend_animation, get_progress())
@@ -205,12 +206,6 @@ func right_weapon_hurts() -> bool:
 func get_movement_mode():
 	return moves_data_repo.get_movement_mode(backend_animation, get_progress())
 #endregion
-
-func assign_combos():
-	for combo in combos:
-		combo.move = self
-		combo.init()
-
 
 func form_hit_data(_weapon : Weapon) -> HitData:
 	print("someone tries to get hit by default Move")

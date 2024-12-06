@@ -30,5 +30,5 @@ func process_jump():
 			jumped = true
 
 
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	player.velocity = player.velocity.normalized() * SPEED 

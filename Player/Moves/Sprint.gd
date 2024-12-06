@@ -1,30 +1,22 @@
 extends Move
 
+@export var close_ledge_sensor : RaySlice
 
 @export var SPEED = 5.0
 @export var TURN_SPEED = 3.2
 
 @export var sprint_stamina_cost = 20 # per sec so multiply by delta
 
-func translate_input_actions(input : InputPackage) -> InputPackage:
-	var input_to_moves : Dictionary = {
-		"move" : "run",
-		"move_fast" : "sprint",
-		"go_up" : "jump_sprint",
-		"midair" : "midair",
-		"beam_walk" : "beam_walk"
-	}
-	
-	for action in input_to_moves.keys():
-		if input.movement_actions.has(action):
-			input.actions.append(input_to_moves[action])
-	
-	return input
+
+func map_input_actions(input : InputPackage):
+	if input.input_actions.has("go_up"):
+		if area_awareness.search_for_climbable_edges(close_ledge_sensor):
+			input.move_names.append("ledge_climb_up")
+		else:
+			input.move_names.append("jump_sprint")
+
 
 func default_lifecycle(input : InputPackage):
-	#if not player.is_on_floor():
-		#return "midair"
-	
 	return best_input_that_can_be_paid(input)
 
 

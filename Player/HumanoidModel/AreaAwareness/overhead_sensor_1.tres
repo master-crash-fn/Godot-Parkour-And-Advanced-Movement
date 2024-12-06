@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RaySlice" load_steps=2 format=3 uid="uid://c1qqtr1bvci4t"]
+
+[ext_resource type="Script" path="res://Player/HumanoidModel/AreaAwareness/RaySlice.gd" id="1_5iawl"]
+
+[resource]
+script = ExtResource("1_5iawl")
+start = Vector3(0, 1.5, 0.2)
+depth = Vector3(0, 0, 0.4)
+width = Vector3(0, 1, 0)
+resolution = 0.1
+collision_mask = 2

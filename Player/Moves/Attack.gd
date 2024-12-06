@@ -14,7 +14,7 @@ func default_lifecycle(input : InputPackage) -> String:
 	
 	var best_input = best_input_that_can_be_paid(input)
 	if works_longer_than(RELEASES_PRIORITY):
-		if works_longer_than(DURATION) or best_input != "idle":
+		if works_longer_than(duration) or best_input != "idle":
 			return best_input
 	return "okay"
 
@@ -28,10 +28,6 @@ func move_player(delta : float):
 	var delta_pos = get_root_position_delta(delta)
 	delta_pos.y = 0
 	player.velocity = player.get_quaternion() * delta_pos / delta
-	#if not player.is_on_floor():
-		#player.velocity.y -= gravity * delta
-		#has_forced_move = true
-		#forced_move = "midair"
 	player.move_and_slide()
 
 

@@ -4,6 +4,12 @@ var height : float
 var distance : float
 
 
+func mapping():
+	{
+		
+	}
+
+
 func default_lifecycle(input : InputPackage):
 	return "okay"
 
@@ -33,7 +39,7 @@ func move_player(delta : float):
 
 
 
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	height = area_awareness.ledge_climbing_point.y - (player.global_position.y)
 	var reduced_grab_point = area_awareness.ledge_climbing_point
 	reduced_grab_point.y = player.global_position.y

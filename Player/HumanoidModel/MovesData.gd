@@ -18,8 +18,8 @@ func get_root_delta_pos(animation : String, progress : float, delta : float) -> 
 func get_transitions_to_queued(animation : String, timecode : float) -> bool:
 	return move_database.get_boolean_value(animation, "MoveDatabase:transitions_to_queued", timecode) 
 
-func get_accepts_queueing(animation : String, timecode : float) -> bool:
-	return move_database.get_boolean_value(animation, "MoveDatabase:accepts_queueing", timecode) 
+#func get_accepts_queueing(animation : String, timecode : float) -> bool:
+	#return move_database.get_boolean_value(animation, "MoveDatabase:accepts_queueing", timecode) 
 
 func get_vulnerable(animation : String, timecode : float) -> bool:
 	return move_database.get_boolean_value(animation, "MoveDatabase:is_vulnerable", timecode) 

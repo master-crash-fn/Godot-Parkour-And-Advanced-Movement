@@ -75,21 +75,15 @@ func bake_faces_data(data : MeshDataTool):
 #func bake_currently_climbable_edges():
 	#pass
 
-# TODO plane intersections can probably use a refactoring
 func has_climbable_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, plane_3 : Vector3) -> PackedVector3Array:
 	plane_1 = global_transform.inverse() * plane_1
 	plane_2 = global_transform.inverse() * plane_2
 	plane_3 = global_transform.inverse() * plane_3
-	var slice_plane = Plane(plane_1, plane_2, plane_3)
 	
 	for e in range(0, static_ledges.size(), 2):
-		var intersection = slice_plane.intersects_segment(static_ledges[e], static_ledges[e+1])
-		if intersection:
-			dot_ver = (intersection - plane_1).dot(plane_2 - plane_1)
-			dot_hor = (intersection - plane_2).dot(plane_3 - plane_2)
-			# if intersection point lays inside the slice rectangle
-			if 0 <= dot_ver and dot_ver <= (plane_2 - plane_1).length_squared() and 0 <= dot_hor and dot_hor <= (plane_3 - plane_2).length_squared():
-				return PackedVector3Array([static_ledges[e], static_ledges[e+1], intersection])
+		var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, static_ledges[e], static_ledges[e+1])
+		if not intersection == Vector3(-21515351, -21515351, -21515351):
+			return PackedVector3Array([global_transform * static_ledges[e], global_transform * static_ledges[e+1], global_transform * intersection])
 	
 	normal = (global_basis.inverse() * normal).snappedf(0.01)
 	
@@ -98,13 +92,10 @@ func has_climbable_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, 
 	if edges:
 		for e in range(0, edges.size(), 2):
 			if is_climbable_edge(edges[e], edges[e+1]):
-				var intersection = slice_plane.intersects_segment(edges[e], edges[e+1])
-				if intersection:
-					dot_ver = (intersection - plane_1).dot(plane_2 - plane_1)
-					dot_hor = (intersection - plane_2).dot(plane_3 - plane_2)
-					# if intersection point lays inside the slice rectangle
-					if 0 <= dot_ver and dot_ver <= (plane_2 - plane_1).length_squared() and 0 <= dot_hor and dot_hor <= (plane_3 - plane_2).length_squared():
-						return PackedVector3Array([edges[e], edges[e+1], intersection])
+				var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, edges[e], edges[e+1])
+				if not intersection == Vector3(-21515351, -21515351, -21515351):
+					return PackedVector3Array([global_transform * edges[e], global_transform * edges[e+1], global_transform * intersection])
+	
 	return PackedVector3Array()
 
 
@@ -123,6 +114,48 @@ func is_step_pattern(normal_1 : Vector3, normal_2 : Vector3) -> bool:
 	return (normal_1.angle_to(Vector3.UP) < 0.3 and sin(normal_2.angle_to(Vector3.UP)) > sqrt(3)/2) or (normal_2.angle_to(Vector3.UP) < 0.3 and sin(normal_1.angle_to(Vector3.UP)) > sqrt(3)/2)
 
 
+func has_thin_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, plane_3 : Vector3) -> PackedVector3Array:
+	plane_1 = global_transform.inverse() * plane_1
+	plane_2 = global_transform.inverse() * plane_2
+	plane_3 = global_transform.inverse() * plane_3
+	
+	#for e in range(0, static_ledges.size(), 2):
+		#var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, static_ledges[e], static_ledges[e+1])
+		#if not intersection == Vector3(-21515351, -21515351, -21515351):
+			#return PackedVector3Array([global_transform * static_ledges[e], global_transform * static_ledges[e+1], global_transform * intersection])
+	
+	normal = (global_basis.inverse() * normal).snappedf(0.01)
+	
+	var edges = faces_data.get(normal)
+	#print(edges.size())
+	if edges:
+		for e in range(0, edges.size(), 2):
+			if is_thin_walkable_edge(edges[e], edges[e+1]):
+				var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, edges[e], edges[e+1])
+				if not intersection == Vector3(-21515351, -21515351, -21515351):
+					return PackedVector3Array([global_transform * edges[e], global_transform * edges[e+1], global_transform * intersection])
+	
+	return PackedVector3Array()
+
+func is_thin_walkable_edge(v_1 : Vector3, v_2 : Vector3) -> bool:
+	var normals =  edges_angles.get(PackedVector3Array([v_1, v_2]))
+	if normals.size() > 1:
+		var normal_1 : Vector3 = global_basis * normals[0]
+		var normal_2 : Vector3 = global_basis * normals[1]
+		#print(str(normal_1) + " " + str(normal_2))
+		return (normal_1 + normal_2).angle_to(Vector3.UP) < 0.2 and normal_1.angle_to(normal_2) > PI/2
+	return false
+
+func edge_intersects_rectangle(plane_1 : Vector3, plane_2 : Vector3, plane_3 : Vector3, edge_1 : Vector3, edge_2 : Vector3) -> Vector3:
+	var slice_plane = Plane(plane_1, plane_2, plane_3)
+	var intersection = slice_plane.intersects_segment(edge_1, edge_2)
+	if intersection:
+		dot_ver = (intersection - plane_1).dot(plane_2 - plane_1)
+		dot_hor = (intersection - plane_2).dot(plane_3 - plane_2)
+		# if intersection point lays inside the slice rectangle
+		if 0 <= dot_ver and dot_ver <= (plane_2 - plane_1).length_squared() and 0 <= dot_hor and dot_hor <= (plane_3 - plane_2).length_squared():
+			return intersection
+	return Vector3(-21515351, -21515351, -21515351) # cringe but wcyd
 
 
 

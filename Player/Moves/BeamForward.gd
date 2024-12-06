@@ -5,23 +5,13 @@ extends Move
 @export var correction_angular_speed : float = 0.4
 @export var fall_treshold : float = PI / 6
 
-var beam : ProtoBeam
-var beam_direction : Vector3
-var walk_direction_mod : int = 1
-
-func translate_input_actions(input : InputPackage) -> InputPackage:
-	var input_to_moves : Dictionary = {
-		"beam_walk" : "beam_walk"
-	}
-	
-	for action in input_to_moves.keys():
-		if input.movement_actions.has(action):
-			input.actions.append(input_to_moves[action])
-	
-	return input
+var face : Vector3
+var back : Vector3
+var current_direction : Vector3
 
 func default_lifecycle(input : InputPackage):
 	return best_input_that_can_be_paid(input)
+
 
 func update(input : InputPackage, delta : float):
 	var next_animation = choose_animation(input)
@@ -44,12 +34,12 @@ func update(input : InputPackage, delta : float):
 		var falling_delta = -sign(vertical_angle) * falling_angular_speed * delta
 		player.global_rotate(player.basis.z, falling_delta)
 	
-	player.velocity = beam_direction * walk_direction_mod * beam_speed
+	player.velocity = current_direction * beam_speed
 	player.move_and_slide()
 
 
 func process_input_vector(_input : InputPackage, delta : float):
-	var dir = beam_direction
+	var dir = (face - back).normalized()
 	dir.y = 0
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(dir, Vector3.UP)
@@ -58,23 +48,25 @@ func process_input_vector(_input : InputPackage, delta : float):
 
 func choose_animation(input : InputPackage) -> String:
 	if input.input_direction.y <= 0: # y axis in 2D is down
-		walk_direction_mod = 1
-		return "rope_walk_forward"
+		current_direction = (face - back).normalized()
+		return "beam_walk_forward"
 	else:
-		walk_direction_mod = -1
-		return "rope_walk_backward"
+		current_direction = (back - face).normalized()
+		return "beam_walk_backward"
 
 
-func on_enter_state():
-	beam = area_awareness.current_beam
-	animation = choose_animation(area_awareness.last_input_package)
-	beam_direction = beam.start.global_position.direction_to(beam.end.global_position)
-	var angle = beam_direction.angle_to(player.basis.z)
-	if angle >= PI / 2:
-		beam_direction *= -1
+func on_enter_state(input : InputPackage):
+	if (area_awareness.current_beam[0] - area_awareness.current_beam[1]).dot(player.basis.z) >= 0:
+		face = area_awareness.current_beam[0]
+		back = area_awareness.current_beam[1]
+	else:
+		face = area_awareness.current_beam[1]
+		back = area_awareness.current_beam[0]
+	
+	animation = choose_animation(input)
+	
 	player.global_rotate(player.basis.z, randf_range(-0.1,0.1))
 
 
 func on_exit_state():
 	area_awareness.last_beam_fall = Time.get_unix_time_from_system()
-	

@@ -28,7 +28,7 @@ func move_player(delta : float):
 		player.global_position += player.basis.z * 0.004
 
 
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	height = area_awareness.ledge_climbing_point.y - (player.global_position.y)
 	print(height)
 

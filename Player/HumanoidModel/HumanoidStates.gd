@@ -23,16 +23,13 @@ func accept_moves():
 			child.player = player
 			child.animator = animator
 			child.skeleton = skeleton
-#			child.base_animator = base_animator
 			child.resources = resources
 			child.combat = combat
 			child.moves_data_repo = moves_data_repo
 			child.container = self
-			child.DURATION = moves_data_repo.get_duration(child.backend_animation)
+			child.duration = moves_data_repo.get_duration(child.backend_animation)
 			child.area_awareness = area_awareness
 			child.legs = legs
-			#child.left_wrist = left_wrist
-			child.assign_combos()
 
 
 func moves_priority_sort(a : String, b : String):

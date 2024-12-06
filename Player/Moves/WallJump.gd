@@ -2,7 +2,7 @@ extends Move
 
 
 func default_lifecycle(_input : InputPackage):
-	if works_longer_than(DURATION):
+	if works_longer_than(duration):
 		return "midair"
 	return "okay"
 
@@ -18,7 +18,7 @@ func move_player(delta : float):
 	#player.move_and_slide()
 
 
-func on_enter_state():
+func on_enter_state(_input : InputPackage):
 	var dir = player.basis.z
 	var hor = player.velocity
 	hor.y = 0

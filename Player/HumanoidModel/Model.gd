@@ -25,18 +25,13 @@ func _ready():
 
 
 func update(input : InputPackage, delta : float):
-	input = area_awareness.add_context(input)
-	input = combat.contextualize(input)
+	area_awareness.add_context(input)
+	#combat.add_context(input) TODO invent something idk
 	var relevance = current_move.check_relevance(input)
 	if relevance != "okay":
-		switch_to(relevance)
-	#print(current_move.move_name)
+		print(current_move.move_name + " -> " + relevance)
+		current_move._on_exit_state()
+		current_move = moves_container.moves[relevance]
+		current_move._on_enter_state(input)
 	current_move.update_resources(delta) # moved back here for now, because of TorsoMoves triggering _update from legs behaviour -> doubledipping
 	current_move._update(input, delta)
-
-
-func switch_to(state : String):
-	print(current_move.move_name + " -> " + state)
-	current_move._on_exit_state()
-	current_move = moves_container.moves[state]
-	current_move._on_enter_state()
