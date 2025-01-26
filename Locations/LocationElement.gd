@@ -5,11 +5,24 @@ class_name LocationElement
 @export var collision_mesh : MeshInstance3D
 @export var collision_shape : CollisionShape3D
 
+# This is a cringe step of returning back to integer ids we had to take,
+# because to "ask" an element we need to ask it by an edge, probably.
+# But player knows global transform of a ledge, and element operates in local.
+# And the /= transform operation has float precision errors, making element 
+# not recognising (1, 2, 0.999999) vector as (1, 2, 1),
+# and a simple rounding up as with normals won't work here for complex figures.
+# TIHI
+# throws on interaction with ledges predefined in the model "by hands" TODO critical
+@export var id_by_edge : Dictionary # {PackedVector3Array : int}
+@export var edge_by_id : Dictionary
 # tuple of vectors : tuple of vectors
 # first one is edge set up as two vertices
 # second one is two normals to two faces of that edge
 # being a dictionary also guarantees as that edges are unique
 @export var edges_angles : Dictionary # {PackedVector3Array : PackedVector3Array}
+# "left" are neighbours by the [0] vertex, and "right" are by [1] one
+@export var left_neighbours : Dictionary # {PackedVector3Array : PackedVector3Array}
+@export var right_neighbours : Dictionary # {PackedVector3Array : PackedVector3Array}
 @export var static_ledges : PackedVector3Array 
 # face's normal : array of points for edges, starts are i = 2*k, ends are i = 2*k+1
 @export var faces_data : Dictionary# {Vector3 : PackedVector3Array}
@@ -28,12 +41,16 @@ var dot_ver : float
 
 
 func bake_edge_data(data : MeshDataTool):
+	var edge_id = 1
 	# init map by remembering deduplicated edges as keys
 	for i in data.get_edge_count():
 		var vertex_1 : Vector3 = data.get_vertex(data.get_edge_vertex(i, 0))
 		var vertex_2 : Vector3 = data.get_vertex(data.get_edge_vertex(i, 1))
 		var as_edge = PackedVector3Array([vertex_1, vertex_2])
 		edges_angles[as_edge] = PackedVector3Array()
+		id_by_edge[as_edge] = edge_id
+		edge_by_id[edge_id] = as_edge
+		edge_id += 1
 	
 	# search for those edges again, but this time setting useful calues
 	for edge in edges_angles.keys():
@@ -75,6 +92,36 @@ func bake_faces_data(data : MeshDataTool):
 #func bake_currently_climbable_edges():
 	#pass
 
+func bake_neighbour_climbable_edges():
+	for edge in edges_angles.keys():
+		if is_triangulation_edge(edge[0], edge[1]):
+			continue
+			
+		# search for "left" neighbours
+		if not left_neighbours.has(edge):
+			left_neighbours[edge] = PackedVector3Array()
+		var neighbours : PackedVector3Array = PackedVector3Array()
+		for other_edge in edges_angles:
+			# we have one vertex, but not the other one, i.e. we are "neighbours" by that vertex
+			if other_edge.has(edge[0]) and not other_edge == edge and not is_triangulation_edge(other_edge[0], other_edge[1]):
+				neighbours.append_array(other_edge)
+		print(str(edge) + " left neighbours " + str(neighbours))
+		left_neighbours[edge].append_array(neighbours)
+		
+		# search for "right" neighbours
+		if not right_neighbours.has(edge):
+			right_neighbours[edge] = PackedVector3Array()
+		neighbours.clear()
+		for other_edge in edges_angles:
+			# we have one vertex, but not the other one, i.e. we are "neighbours" by that vertex
+			if other_edge.has(edge[1]) and not other_edge == edge and not is_triangulation_edge(other_edge[0], other_edge[1]):
+				neighbours.append_array(other_edge)
+		print(str(edge) + " right neighbours " + str(neighbours))
+		right_neighbours[edge].append_array(neighbours)
+		print("------------------------------------")
+	pass
+
+
 func has_climbable_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, plane_3 : Vector3) -> PackedVector3Array:
 	plane_1 = global_transform.inverse() * plane_1
 	plane_2 = global_transform.inverse() * plane_2
@@ -94,10 +141,19 @@ func has_climbable_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, 
 			if is_climbable_edge(edges[e], edges[e+1]):
 				var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, edges[e], edges[e+1])
 				if not intersection == Vector3(-21515351, -21515351, -21515351):
-					return PackedVector3Array([global_transform * edges[e], global_transform * edges[e+1], global_transform * intersection])
+					return PackedVector3Array([ global_transform * edges[e], global_transform * edges[e+1], global_transform * intersection, Vector3(id_by_edge[PackedVector3Array([edges[e], edges[e+1]])], 0, 0) ])
 	
 	return PackedVector3Array()
 
+
+func is_triangulation_edge(v_1 : Vector3, v_2 : Vector3) -> bool:
+	var normals =  edges_angles.get(PackedVector3Array([v_1, v_2]))
+	if normals.size() > 1:
+		var normal_1 = normals[0]
+		var normal_2 = normals[1]
+		#print(str(normal_1) + " " + str(normal_2))
+		return normal_1.is_equal_approx(normal_2)
+	return false
 
 func is_climbable_edge(v_1 : Vector3, v_2 : Vector3) -> bool:
 	var normals =  edges_angles.get(PackedVector3Array([v_1, v_2]))
@@ -156,6 +212,38 @@ func edge_intersects_rectangle(plane_1 : Vector3, plane_2 : Vector3, plane_3 : V
 		if 0 <= dot_ver and dot_ver <= (plane_2 - plane_1).length_squared() and 0 <= dot_hor and dot_hor <= (plane_3 - plane_2).length_squared():
 			return intersection
 	return Vector3(-21515351, -21515351, -21515351) # cringe but wcyd
+
+func has_climbable_left_neighbour(id : int) -> bool:
+	var edge = edge_by_id[id]
+	var neighbours = left_neighbours[edge]
+	for n in range(0, neighbours.size(), 2):
+		if is_climbable_edge(neighbours[n], neighbours[n+1]):
+			return true
+	return false
+
+func has_climbable_right_neighbour(id : int) -> bool:
+	var edge = edge_by_id[id]
+	var neighbours = right_neighbours[edge]
+	for n in range(0, neighbours.size(), 2):
+		if is_climbable_edge(neighbours[n], neighbours[n+1]):
+			return true
+	return false
+
+func get_next_climbable_neighbour(id : int, side : int) -> PackedVector3Array:
+	var edge = edge_by_id[id]
+	var neighbours
+	if side == 0:
+		neighbours = left_neighbours[edge]
+		for n in range(0, neighbours.size(), 2):
+			if is_climbable_edge(neighbours[n], neighbours[n+1]):
+				return PackedVector3Array([global_transform * neighbours[n], global_transform * neighbours[n+1], Vector3(id_by_edge[PackedVector3Array([neighbours[n], neighbours[n+1]])], 0, 0)])
+	elif side == 1:
+		neighbours = right_neighbours[edge]
+		for n in range(0, neighbours.size(), 2):
+			if is_climbable_edge(neighbours[n], neighbours[n+1]):
+				return PackedVector3Array([global_transform * neighbours[n], global_transform * neighbours[n+1], Vector3(id_by_edge[PackedVector3Array([neighbours[n], neighbours[n+1]])], 0, 0)])
+	return PackedVector3Array()
+
 
 
 

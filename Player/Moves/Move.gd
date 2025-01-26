@@ -32,7 +32,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 	"move_fast" : "sprint",
 	"go_up" : "jump_run",
 	"midair" : "midair",
-	"beam" : "beam_walk",
+	"beam" : "beam_walk"
 }
 
 var enter_state_time : float
@@ -83,7 +83,8 @@ func _on_enter_state(input : InputPackage):
 	resources.pay_resource_cost(self)
 	mark_enter_state()
 	on_enter_state(input)
-	animator.update_body_animations()
+	if animation != "":
+		animator.update_body_animations()
 
 func on_enter_state(input : InputPackage):
 	pass

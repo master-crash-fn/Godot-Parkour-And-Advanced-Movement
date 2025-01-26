@@ -5,6 +5,7 @@ extends Node
 @onready var model = $".."
 
 func _ready():
+	#DEV_pin_ledge_animations()
 	#DEV_pin_root("ledge_climb_up_legs", "ledge_climb_up_params", Vector3(0, 0.894, 0.026))
 	#DEV_nail_z_coordinate("beam_fall_right_legs", "beam_fall_params", -0.062)
 	pass
@@ -42,13 +43,48 @@ func _ready():
 		#animation.track_set_key_value(hips_track, i, value)
 	#ResourceSaver.save(animation, "res://Assets/Ready Animations/" + animation_name + "_ROOT_PINNED.res")
 	#ResourceSaver.save(backend_animation, "res://Player/Moves/BackendAnimations/" + into_backend_animation + "_WITH_ROOT.res")
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+#func DEV_pin_ledge_animations():
+	#var left_animation = skeleton_animator.get_animation("ledge_left") as Animation
+	#var right_animation = skeleton_animator.get_animation("ledge_right") as Animation
+	#var backend_animation = move_database.get_animation("ledge_grab_params") as Animation
+	#var left_backend_track = backend_animation.find_track("../LedgeGrab:left_root_pos", Animation.TYPE_VALUE)
+	#var right_backend_track = backend_animation.find_track("../LedgeGrab:right_root_pos", Animation.TYPE_VALUE)
+	#var left_hips_track = left_animation.find_track("%GeneralSkeleton:Hips", Animation.TYPE_POSITION_3D)
+	#var right_hips_track = left_animation.find_track("%GeneralSkeleton:Hips", Animation.TYPE_POSITION_3D)
+	#for i : int in left_animation.track_get_key_count(left_hips_track):
+		#var position = left_animation.track_get_key_value(left_hips_track, i)
+		#var time = left_animation.track_get_key_time(left_hips_track, i)
+		#backend_animation.track_insert_key(left_backend_track, time, position)
+		#print(str(position) + " at " + str(time))
+		#var position_without_x = position
+		#position_without_x.x = -0.003
+		#left_animation.track_set_key_value(left_hips_track, i, position_without_x)
+	#for i : int in right_animation.track_get_key_count(right_hips_track):
+		#var position = right_animation.track_get_key_value(right_hips_track, i)
+		#var time = right_animation.track_get_key_time(right_hips_track, i)
+		#backend_animation.track_insert_key(right_backend_track, time, position)
+		#print(str(position) + " at " + str(time))
+		#var position_without_x = position
+		#position_without_x.x = -0.003
+		#right_animation.track_set_key_value(right_hips_track, i, position_without_x)
+	#ResourceSaver.save(right_animation, "res://Assets/Ready Animations/ledge_right" + "_ROOT_PINNED.res")
+	#ResourceSaver.save(left_animation, "res://Assets/Ready Animations/ledge_left" + "_ROOT_PINNED.res")
+	#ResourceSaver.save(backend_animation, "res://Player/Moves/BackendAnimations/ledge_grab_params" + "_WITH_ROOT.res")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ssdfesf

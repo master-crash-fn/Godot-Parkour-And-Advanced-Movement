@@ -24,6 +24,7 @@ func save_torso_animations(player : AnimationPlayer, skeleton : Skeleton3D):
 	#print("saving torso tracks")
 	var torso_indeсes = get_torso_bones_indeces(skeleton)
 	for animation_name in player.get_animation_list():
+		print(animation_name)
 		if not idiot_proof(animation_name):
 			continue
 		var animation = player.get_animation(animation_name) as Animation

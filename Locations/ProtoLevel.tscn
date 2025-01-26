@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=14 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://Assets/Textures/texture_09.png" id="3_ruxjn"]
 [ext_resource type="PackedScene" uid="uid://qtkhjccxfscx" path="res://Assets/Models/fence_wall.glb" id="6_t55mv"]
 [ext_resource type="PackedScene" uid="uid://b1q2b2tmp1rco" path="res://Assets/Models/thin.glb" id="7_ik8ca"]
-[ext_resource type="PackedScene" uid="uid://ddarx8liglmbm" path="res://Assets/Models/monkey with curve as mesh.glb" id="7_rcw0k"]
 [ext_resource type="PackedScene" uid="uid://cbt38th5ck45j" path="res://Assets/Models/untitled.glb" id="9_7r3qk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
@@ -140,40 +139,34 @@ collision_mask = 0
 size = Vector3(5, 2, 5)
 
 [node name="cube1" parent="." instance=ExtResource("9_7r3qk")]
-transform = Transform3D(0.700665, 0.182626, -0.689723, -0.191374, 0.979369, 0.0649087, 0.687347, 0.0865158, 0.721159, 11.9941, 0.348272, 5.27356)
+transform = Transform3D(0.894895, 0.201266, -0.398317, -0.191374, 0.979369, 0.0649087, 0.403163, 0.0181411, 0.914949, 14.1856, 0.348272, 5.27356)
 
 [node name="Cube" parent="cube1" index="0"]
-visible = false
+visible = true
 
 [node name="cube2" parent="." instance=ExtResource("9_7r3qk")]
 transform = Transform3D(0.832109, 0, -0.554612, 0, 1, 0, 0.554612, 0, 0.832109, 12.4337, -0.5, -1.51834)
 
 [node name="Cube" parent="cube2" index="0"]
-visible = false
+visible = true
 
 [node name="cube3" parent="." instance=ExtResource("9_7r3qk")]
-transform = Transform3D(0.983207, 0, 0.182493, 0.124872, 0.729243, -0.672764, -0.133082, 0.684254, 0.716997, 17.9079, 1.17942, -3.83438)
+transform = Transform3D(0.848089, -0.0745618, -0.524582, 0.0201684, 0.993874, -0.108659, 0.52947, 0.0815727, 0.844397, 15.2269, 0.87102, 0.972892)
 
 [node name="Cube" parent="cube3" index="0"]
-visible = false
-
-[node name="monke2" parent="." instance=ExtResource("7_rcw0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6323, -1.55525, 4.79453)
-
-[node name="Suzanne" parent="monke2" index="0"]
-visible = false
-
-[node name="monke1" parent="." instance=ExtResource("7_rcw0k")]
-transform = Transform3D(0.396811, 0, 0.9179, 0, 1, 0, -0.9179, 0, 0.396811, 23.5795, -1.38128, 2.42141)
+visible = true
 
 [node name="FenceWall" parent="." instance=ExtResource("6_t55mv")]
 transform = Transform3D(-0.0416664, 0, -0.999132, 0, 1, 0, 0.999132, 0, -0.0416664, -0.748516, -0.5, 6.37969)
 
+[node name="Fence2" parent="FenceWall" index="0"]
+visible = true
+
 [node name="StaticBody3D" parent="." instance=ExtResource("7_ik8ca")]
 transform = Transform3D(0.371479, 0.0945253, 0.923617, -0.0352721, 0.995522, -0.0876979, -0.927771, 0, 0.37315, -9.47881, 7.65356, -9.48447)
+collision_layer = 2
 
 [editable path="cube1"]
 [editable path="cube2"]
 [editable path="cube3"]
-[editable path="monke2"]
 [editable path="FenceWall"]

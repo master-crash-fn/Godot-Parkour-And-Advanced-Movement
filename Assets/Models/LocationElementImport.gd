@@ -22,6 +22,7 @@ func _post_import(scene):
 	collision_mesh_data.create_from_surface(collider_mesh.mesh, 0)
 	new_location_element.bake_edge_data(collision_mesh_data)
 	new_location_element.bake_faces_data(collision_mesh_data)
+	new_location_element.bake_neighbour_climbable_edges()
 	
 	new_location_element.collision_layer = 3 # i.e. 1 and 2 as 2^0+2^1, it's a bitmask, not an int
 	

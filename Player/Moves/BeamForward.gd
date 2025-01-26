@@ -70,3 +70,4 @@ func on_enter_state(input : InputPackage):
 
 func on_exit_state():
 	area_awareness.last_beam_fall = Time.get_unix_time_from_system()
+	animation = ""

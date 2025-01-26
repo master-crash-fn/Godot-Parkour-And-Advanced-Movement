@@ -15,6 +15,23 @@ func get_root_delta_pos(animation : String, progress : float, delta : float) -> 
 	return delta_pos
 
 
+func get_delta_pos(animation : String, track_name : String, progress : float, delta : float) -> Vector3:
+	var data = move_database.get_animation(animation)
+	if progress >= data.length:
+		progress = fmod(progress, data.length)
+		delta = progress
+	var track = data.find_track(track_name, Animation.TYPE_VALUE)
+	if data.track_get_key_count(track) == 0:
+		return Vector3.ZERO
+	var previous_pos = data.value_track_interpolate(track, progress - delta)
+	#print("now " + str(data.value_track_interpolate(track, progress)))
+	var current_pos = data.value_track_interpolate(track, progress)
+	#print("was " + str(data.value_track_interpolate(track, progress - delta)))
+	var delta_pos = current_pos - previous_pos
+	print(delta_pos)
+	return delta_pos
+
+
 func get_transitions_to_queued(animation : String, timecode : float) -> bool:
 	return move_database.get_boolean_value(animation, "MoveDatabase:transitions_to_queued", timecode) 
 

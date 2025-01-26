@@ -26,8 +26,12 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_pressed("go_up"):
 		new_input.input_actions.append("go_up")
+	if Input.is_action_pressed("go_down"):
+		new_input.input_actions.append("go_down")
 	
-	#if Input.is_action_just_pressed("light_attack"):
-		#new_input.input_actions.append("light_attack_pressed")
+	if Input.is_action_just_pressed("light_attack"):
+		new_input.input_actions.append("light_attack_pressed")
+	if Input.is_action_just_pressed("heavy_attack"):
+		new_input.input_actions.append("heavy_attack_pressed")
 	
 	return new_input
