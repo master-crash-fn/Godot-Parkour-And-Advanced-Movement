@@ -117,13 +117,13 @@ func choose_animation(input_vector : Vector3):
 	if current_substate == Substate.IDLE:
 		target_animation = "parkour_ledge_idle"
 	elif current_substate == Substate.TRAVERSE:
-		if input_vector.cross(player.basis.z).y < 0:
+		if input_vector.cross(grab_direction).y < 0:
 			target_animation = "ledge_left"
 		else :
 			target_animation = "ledge_right"
 	else:
 		# I duplicate this because I don't have such an animation, but here's when you set it if you have it
-		if input_vector.cross(player.basis.z).y < 0:
+		if input_vector.cross(grab_direction).y < 0:
 			target_animation = "ledge_left" 
 		else :
 			target_animation = "ledge_right"
