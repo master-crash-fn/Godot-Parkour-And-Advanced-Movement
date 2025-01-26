@@ -5,7 +5,7 @@ extends Move
 var grab_direction : Vector3
 
 var next_point : int # 0 or 1
-enum Substate {IDLE, TRAVERSE, ANGLE}
+enum Substate {CORRECTION, IDLE, TRAVERSE, ANGLE}
 var current_substate : Substate = Substate.IDLE
 
 # these variables power angle transition be it an animation or our procedural abomination
@@ -20,7 +20,7 @@ var angle_progress : float = 0
 @export var right_root_pos : Vector3
 
 func map_input_actions(input : InputPackage):
-	if current_substate != Substate.ANGLE and works_longer_than(0.3):
+	if current_substate != Substate.ANGLE and current_substate != Substate.CORRECTION:
 		if input.input_actions.has("go_up"):
 			var input_vector : Vector3 = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
 			if input_vector:
@@ -60,15 +60,11 @@ func update(input : InputPackage, delta : float):
 	choose_substate(input_vector)
 	#print(current_substate)
 	choose_animation(input_vector)
-	
-	if works_less_than(0.3):
-		correct_posture(delta)
-	else:
-		move_player(delta)
+	move_player(delta)
 
 # TODO consider enum, but I like current tech with index to use it directly as area_awareness.current_ledge[next_point]
 func choose_direction(input_vector : Vector3):
-	if current_substate == Substate.ANGLE:
+	if current_substate == Substate.ANGLE or current_substate == Substate.CORRECTION:
 		return
 	if not input_vector:
 		next_point = -1 # nowhere
@@ -82,6 +78,8 @@ func choose_direction(input_vector : Vector3):
 	next_point = -1
 
 func choose_substate(input_vector : Vector3):
+	if works_less_than(0.3):
+		return
 	if current_substate == Substate.ANGLE:
 		return # because in a real game angle traversal is probably a locking animation we exit it by a different mechanism
 	if not input_vector or next_point == -1:
@@ -133,14 +131,6 @@ func choose_animation(input_vector : Vector3):
 		animation = target_animation
 		animator.update_body_animations()
 
-# We don't have processing for ANGLE state becasue we can't "grab" a ledge by an angle, possibly TODO add
-func correct_posture(delta : float):
-	# move towards climbing point
-	player.global_position = player.global_position.move_toward(area_awareness.ledge_climbing_point - (player.global_basis * Vector3(0, 1.715, 0.403)), 0.05)
-	# rotate to align with ledge
-	var correction_angular_speed : float = 0.3
-	player.rotate_y(-clamp(grab_direction.signed_angle_to(player.basis.z, Vector3.UP), -correction_angular_speed, correction_angular_speed))
-
 # (next_point + 1) % 2 is a smartass way to turn 0 into 1 and back so we juggle vector direction in one string to flex
 func move_player(delta : float):
 	var velocity = Vector3(0, 0, 0)
@@ -170,6 +160,13 @@ func move_player(delta : float):
 			area_awareness.current_ledge_id = next_ledge[2].x
 			grab_direction = next_grab_dir
 			area_awareness.last_wall_jump_normal = -player.basis.z
+	elif current_substate == Substate.CORRECTION:
+		# move towards climbing point
+		player.global_position = player.global_position.move_toward(area_awareness.ledge_climbing_point - (player.global_basis * Vector3(0, 1.715, 0.403)), 0.05)
+		# rotate to align with ledge
+		var correction_angular_speed : float = 0.3
+		player.rotate_y(-clamp(grab_direction.signed_angle_to(player.basis.z, Vector3.UP), -correction_angular_speed, correction_angular_speed))
+
 
 
 func have_next_ledge() -> bool:
@@ -178,7 +175,9 @@ func have_next_ledge() -> bool:
 	return area_awareness.current_ledge_object.has_climbable_left_neighbour(area_awareness.current_ledge_id)
 
 
-func on_enter_state(_input : InputPackage):	
+func on_enter_state(_input : InputPackage):
+	current_substate = Substate.CORRECTION
+	
 	grab_direction = Vector3.UP.cross(area_awareness.current_ledge[0].direction_to(area_awareness.current_ledge[1]))
 	if grab_direction.angle_to(player.basis.z) > PI / 2:
 		grab_direction *= -1
