@@ -114,7 +114,7 @@ func calculate_next_grab_direction():
 
 func choose_animation(input_vector : Vector3):
 	var target_animation : String
-	if current_substate == Substate.IDLE:
+	if current_substate == Substate.IDLE or current_substate == Substate.CORRECTION:
 		target_animation = "parkour_ledge_idle"
 	elif current_substate == Substate.TRAVERSE:
 		if input_vector.cross(grab_direction).y < 0:

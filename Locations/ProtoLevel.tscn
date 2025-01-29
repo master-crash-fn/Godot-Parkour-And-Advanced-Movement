@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=13 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://Assets/Textures/texture_09.png" id="3_ruxjn"]
-[ext_resource type="PackedScene" uid="uid://qtkhjccxfscx" path="res://Assets/Models/fence_wall.glb" id="6_t55mv"]
 [ext_resource type="PackedScene" uid="uid://b1q2b2tmp1rco" path="res://Assets/Models/thin.glb" id="7_ik8ca"]
 [ext_resource type="PackedScene" uid="uid://cbt38th5ck45j" path="res://Assets/Models/untitled.glb" id="9_7r3qk"]
 
@@ -67,7 +66,7 @@ radius = 0.2
 transform = Transform3D(1, 0, 0, 0, 0.511878, 0.859058, 0, -0.859058, 0.511878, 0, 7.65111, -6.09804)
 
 [node name="Box1" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90411, 0.5, 1.79941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.94652, 1.13134, 1.79941)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
@@ -156,12 +155,6 @@ transform = Transform3D(0.848089, -0.0745618, -0.524582, 0.0201684, 0.993874, -0
 [node name="Cube" parent="cube3" index="0"]
 visible = true
 
-[node name="FenceWall" parent="." instance=ExtResource("6_t55mv")]
-transform = Transform3D(-0.0416664, 0, -0.999132, 0, 1, 0, 0.999132, 0, -0.0416664, -0.748516, -0.5, 6.37969)
-
-[node name="Fence2" parent="FenceWall" index="0"]
-visible = true
-
 [node name="StaticBody3D" parent="." instance=ExtResource("7_ik8ca")]
 transform = Transform3D(0.371479, 0.0945253, 0.923617, -0.0352721, 0.995522, -0.0876979, -0.927771, 0, 0.37315, -9.47881, 7.65356, -9.48447)
 collision_layer = 2
@@ -169,4 +162,3 @@ collision_layer = 2
 [editable path="cube1"]
 [editable path="cube2"]
 [editable path="cube3"]
-[editable path="FenceWall"]

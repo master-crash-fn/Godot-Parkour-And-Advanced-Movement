@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://eec5ujuowf51"]
+[gd_scene load_steps=118 format=3 uid="uid://eec5ujuowf51"]
 
 [ext_resource type="Script" path="res://Player/HumanoidModel/Model.gd" id="1_mokw1"]
 [ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://Assets/Ready Animations/jump_sprint.res" id="2_gpv2h"]
@@ -49,6 +49,8 @@
 [ext_resource type="Animation" uid="uid://dknct54bpm8sf" path="res://Assets/Ready Animations/mixamo_legs_animations/ledge_attack_2_legs.res" id="24_hfx87"]
 [ext_resource type="Animation" uid="uid://kux8ogygvefj" path="res://Assets/Ready Animations/longsword_2_Z_PROJECTED.res" id="25_eky8q"]
 [ext_resource type="Resource" uid="uid://c1qqtr1bvci4t" path="res://Player/HumanoidModel/AreaAwareness/overhead_sensor_1.tres" id="25_ug7xr"]
+[ext_resource type="PackedScene" uid="uid://ib1mhtf0l41k" path="res://Assets/Models/rdr2_arthur_morgan_hat-highquality.glb" id="27_3eb7e"]
+[ext_resource type="PackedScene" uid="uid://c08x1typgjn4u" path="res://Assets/Models/whip_cooper.glb" id="27_etfrp"]
 [ext_resource type="Script" path="res://Player/Moves/Roll.gd" id="29_824ux"]
 [ext_resource type="PackedScene" uid="uid://cvubc08qnq2y" path="res://Player/HumanoidModel/HumanoidStates.tscn" id="30_xkqvj"]
 [ext_resource type="Script" path="res://Player/HumanoidModel/MovesData.gd" id="31_l4eyu"]
@@ -5352,11 +5354,32 @@ external_skeleton = NodePath("../GeneralSkeleton")
 
 [node name="WeaponSocket" type="Node3D" parent="RightWrist"]
 transform = Transform3D(0.325568, 0.945519, 0, -0.945519, 0.325568, 0, 0, 0, 1, 0.0275242, 0.0607529, 0.0400013)
+visible = false
 
 [node name="Sword" parent="RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") groups=["player_weapon"] instance=ExtResource("12_km6ig")]
 transform = Transform3D(0.987281, 0.158985, -1.16882e-08, -0.158985, 0.98728, -1.56441e-08, 9.05237e-09, 1.73034e-08, 1, 0, 0, 0)
 collision_mask = 4
 holder = NodePath("../../..")
+
+[node name="TEMP_whip_joke" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.998354, -0.0429912, 0.0379526, 0.0267789, 0.934717, 0.354383, -0.0507103, -0.352784, 0.93433, -0.00266907, 0.868737, -0.00705785)
+bone_name = "Hips"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../GeneralSkeleton")
+
+[node name="Sketchfab_Scene" parent="TEMP_whip_joke" instance=ExtResource("27_etfrp")]
+transform = Transform3D(-0.00637916, 0.0292209, -0.00233366, -0.0216217, -0.00307761, 0.0205677, 0.0197941, 0.00605541, 0.0217146, -0.982196, 0.0215498, -0.163036)
+
+[node name="TEMP_head_joke" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.998354, -0.0429912, 0.0379526, 0.0267789, 0.934717, 0.354383, -0.0507103, -0.352784, 0.93433, -0.0277623, 1.37806, -0.232118)
+bone_name = "Head"
+bone_idx = 5
+use_external_skeleton = true
+external_skeleton = NodePath("../GeneralSkeleton")
+
+[node name="Sketchfab_Scene" parent="TEMP_head_joke" instance=ExtResource("27_3eb7e")]
+transform = Transform3D(0.006, 0, 0, 0, 0.00573015, 0.00177915, 0, -0.00177915, 0.00573015, 0, 0.141, 0)
 
 [node name="States" parent="." node_paths=PackedStringArray("animator", "skeleton", "resources", "combat", "area_awareness", "moves_data_repo", "legs") instance=ExtResource("30_xkqvj")]
 animator = NodePath("../SplitBodyAnimator")
@@ -5493,6 +5516,7 @@ tracking_angular_speed = 0.0
 
 [node name="LedgeLeap" type="Node" parent="States"]
 script = ExtResource("41_kdgov")
+h = 1.39
 animation = "parkour_ledge_leap"
 move_name = "ledge_leap"
 priority = 11

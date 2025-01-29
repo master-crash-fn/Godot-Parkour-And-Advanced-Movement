@@ -105,9 +105,9 @@ func search_for_climbable_edges(sensor : RaySlice, from : Transform3D = global_t
 	if Time.get_unix_time_from_system() - last_ledge_grab < ledge_cooldown:
 		return false
 	var ray_slice_res = sensor.scan(from, space)
-	$cringe/test_marker2.global_position = from * (sensor.start)
-	$cringe/test_marker3.global_position = from * (sensor.start + sensor.width)
-	$cringe/test_marker4.global_position = from * (sensor.start + sensor.depth)
+	#$cringe/test_marker2.global_position = from * (sensor.start)
+	#$cringe/test_marker3.global_position = from * (sensor.start + sensor.width)
+	#$cringe/test_marker4.global_position = from * (sensor.start + sensor.depth)
 	if not ray_slice_res.is_empty():
 		var collider = ray_slice_res["collider"]
 		if collider is LocationElement:

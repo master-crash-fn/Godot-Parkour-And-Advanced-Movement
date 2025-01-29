@@ -278,6 +278,7 @@ skeleton = NodePath("")
 
 [node name="SwordVisuals1" parent="." instance=ExtResource("2_3ywgv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3883)
+visible = false
 
 [node name="Stamina _bar_" type="Label" parent="."]
 offset_left = 93.0

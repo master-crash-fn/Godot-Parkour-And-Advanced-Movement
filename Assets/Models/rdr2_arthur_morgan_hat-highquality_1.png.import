@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://05mocal5s4oa"
+path.s3tc="res://.godot/imported/rdr2_arthur_morgan_hat-highquality_1.png-fd5f9a95a447476723c386635a6674f3.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "2e098f1250324e84b55b28d69f8a7f62"
+}
+
+[deps]
+
+source_file="res://Assets/Models/rdr2_arthur_morgan_hat-highquality_1.png"
+dest_files=["res://.godot/imported/rdr2_arthur_morgan_hat-highquality_1.png-fd5f9a95a447476723c386635a6674f3.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=8
+roughness/src_normal="res://Assets/Models/rdr2_arthur_morgan_hat-highquality_2.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
