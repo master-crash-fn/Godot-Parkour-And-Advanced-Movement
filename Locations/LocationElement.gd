@@ -141,6 +141,13 @@ func has_climbable_edge(normal : Vector3, plane_1 : Vector3, plane_2 : Vector3, 
 			if is_climbable_edge(edges[e], edges[e+1]):
 				var intersection = edge_intersects_rectangle(plane_1, plane_2, plane_3, edges[e], edges[e+1])
 				if not intersection == Vector3(-21515351, -21515351, -21515351):
+					# Demonstration of fuck you by transforms  TODO delete
+					var edge_temp = edges[e]
+					prints("local to global edge: ", edge_temp, " > ", global_transform * edge_temp)
+					edge_temp = global_transform * edge_temp
+					edge_temp = global_transform.inverse() * edge_temp
+					prints("global back to local: ", global_transform * edge_temp, " > ", edge_temp)
+					
 					return PackedVector3Array([ global_transform * edges[e], global_transform * edges[e+1], global_transform * intersection, Vector3(id_by_edge[PackedVector3Array([edges[e], edges[e+1]])], 0, 0) ])
 	
 	return PackedVector3Array()

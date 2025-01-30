@@ -127,8 +127,8 @@ func search_for_climbable_edges(sensor : RaySlice, from : Transform3D = global_t
 				#    We then count direction module and find out direct coordinates of altitude we search for.
 				#    this canvas sucks at explaining this, more info can be found for example here:
 				#    https://math.stackexchange.com/questions/2213165/find-shortest-distance-between-lines-in-3d
-				var p = Vector3.UP # player axis, it just a vertical one
-				var n = (edge[1] - edge[0]).cross(p) # direction of eltitude vector # change order
+				var p = Vector3.UP # player axis, ie just a vertical one
+				var n = (edge[1] - edge[0]).cross(p) # direction of altitude vector
 				var altitude = edge[0] + ((p.cross(n)).dot(global_position - edge[0]) / n.length_squared()) * (edge[1] - edge[0])
 				$test_marker.global_position = altitude
 				if altitude.distance_to(edge[0]) >= shoulder_width / 2 and altitude.distance_to(edge[1]) >= shoulder_width / 2 and (altitude - edge[0]).dot(altitude - edge[1]) < 0:

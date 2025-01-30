@@ -5,6 +5,7 @@ extends Move
 var grab_direction : Vector3
 
 var next_point : int # 0 or 1
+
 enum Substate {CORRECTION, IDLE, TRAVERSE, ANGLE}
 var current_substate : Substate = Substate.IDLE
 
@@ -78,7 +79,7 @@ func choose_direction(input_vector : Vector3):
 	next_point = -1
 
 func choose_substate(input_vector : Vector3):
-	if works_less_than(0.3):
+	if works_less_than(0.3): # we go into CORRECTION on entering the state
 		return
 	if current_substate == Substate.ANGLE:
 		return # because in a real game angle traversal is probably a locking animation we exit it by a different mechanism
