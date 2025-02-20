@@ -14,10 +14,10 @@ func default_lifecycle(input : InputPackage):
 
 
 func update(input : InputPackage, delta : float):
-	var next_animation = choose_animation(input)
-	if next_animation != animation:
-		animation = next_animation
-		animator.update_body_animations()
+	#var next_animation = choose_animation(input)
+	#if next_animation != animation:
+		#animation = next_animation
+		#animator.update_body_animations()
 	
 	var vertical_angle = player.basis.y.signed_angle_to(Vector3.UP, player.basis.z)
 	if abs(vertical_angle) > fall_treshold:

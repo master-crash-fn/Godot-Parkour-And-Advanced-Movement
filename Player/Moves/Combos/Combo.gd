@@ -1,14 +1,7 @@
 extends Resource
 class_name Combo
 
+var parent_move : Move
 
-var move : Move
-@export var triggered_move : String
-
-
-func init():
+func map(input : InputPackage):
 	pass
-
-
-func is_triggered(_input : InputPackage) -> bool:
-	return false

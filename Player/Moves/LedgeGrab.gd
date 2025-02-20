@@ -20,7 +20,7 @@ var angle_progress : float = 0
 @export var left_root_pos : Vector3
 @export var right_root_pos : Vector3
 
-func map_input_actions(input : InputPackage):
+func map_custom_actions(input : InputPackage):
 	if current_substate != Substate.ANGLE and current_substate != Substate.CORRECTION:
 		if input.input_actions.has("go_up"):
 			var input_vector : Vector3 = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
@@ -32,14 +32,10 @@ func map_input_actions(input : InputPackage):
 					input.move_names.append("ledge_leap")
 					return
 			input.move_names.append("jump_wall")
-		if input.input_actions.has("go_down"):
-			input.move_names.append("midair")
-			print("down")
-		if input.input_actions.has("light_attack_pressed"):
-			input.move_names.append("ledge_attack_1")
-		if input.input_actions.has("heavy_attack_pressed"):
-			input.move_names.append("ledge_attack_2")
-		
+		input.map("go_down", "midair")
+		input.map("light_attack_pressed", "ledge_attack_1")
+		input.map("heavy_attack_pressed", "ledge_attack_2")
+
 
 func towards_input_transform(input_vector : Vector3) -> Transform3D:
 	var basis : Basis
@@ -128,9 +124,9 @@ func choose_animation(input_vector : Vector3):
 			target_animation = "ledge_left" 
 		else :
 			target_animation = "ledge_right"
-	if target_animation != animation:
-		animation = target_animation
-		animator.update_body_animations()
+	#if target_animation != animation:
+		#animation = target_animation
+		#animator.update_body_animations()
 
 # (next_point + 1) % 2 is a smartass way to turn 0 into 1 and back so we juggle vector direction in one string to flex
 func move_player(delta : float):

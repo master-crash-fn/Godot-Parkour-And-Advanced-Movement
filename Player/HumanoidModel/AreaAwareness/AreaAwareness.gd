@@ -117,16 +117,6 @@ func search_for_climbable_edges(sensor : RaySlice, from : Transform3D = global_t
 			normal = ray_slice_res["normal"]
 			var edge : PackedVector3Array = collider.has_climbable_edge(normal, plane_1, plane_2, plane_3)
 			if edge:
-				# The formula below cooks brains, so here's how to understand it:
-				# 1) In terms of the task, we search the common altitude for two 3d lines,
-				#    one is our edge, i.e. (edge[1] - edge[0]) vector and all points that can be produced by
-				#    e = edge[0] + k * (edge[1] - edge[0]);
-				#    second is the "segment" of player height, ie just a vertical axis
-				# 2) In terms of solution, we can tap into unholy powers of vector algebra to easily find us the
-				#    direction vector of that altitude - it's the vector crossing of player axis and edge.
-				#    We then count direction module and find out direct coordinates of altitude we search for.
-				#    this canvas sucks at explaining this, more info can be found for example here:
-				#    https://math.stackexchange.com/questions/2213165/find-shortest-distance-between-lines-in-3d
 				var p = Vector3.UP # player axis, ie just a vertical one
 				var n = (edge[1] - edge[0]).cross(p) # direction of altitude vector
 				var altitude = edge[0] + ((p.cross(n)).dot(global_position - edge[0]) / n.length_squared()) * (edge[1] - edge[0])

@@ -8,7 +8,7 @@ var jump_direction : Vector3
 var landing_height : float = 1.163
 
 
-func map_input_actions(input : InputPackage):
+func map_custom_actions(input : InputPackage):
 	if input.input_actions.has("go_up") and area_awareness.can_wall_jump():
 		input.input_actions.erase("go_up")
 		input.move_names.append("jump_wall")

@@ -6,7 +6,7 @@ extends Move
 @export var TURN_SPEED = 2
  
 
-func map_input_actions(input : InputPackage):
+func map_custom_actions(input : InputPackage):
 	if input.input_actions.has("go_up"):
 		if area_awareness.search_for_climbable_edges(ledge_sensor):
 			input.move_names.append("ledge_climb_up")
@@ -40,5 +40,5 @@ func process_input_vector(input : InputPackage, delta : float):
 
 
 
-func on_exit_state():
-	animator.set_speed_scale(1)
+#func on_exit_state():
+	#animator.set_speed_scale(1)

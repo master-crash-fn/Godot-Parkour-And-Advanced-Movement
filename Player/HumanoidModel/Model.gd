@@ -3,7 +3,7 @@ class_name PlayerModel
 
 @onready var player = $".." as CharacterBody3D
 @onready var skeleton = %GeneralSkeleton
-@onready var animator = $SplitBodyAnimator
+#@onready var animator = $SplitBodyAnimator
 @onready var combat = $Combat as HumanoidCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hurtbox = $Root/Hitbox as Hurtbox

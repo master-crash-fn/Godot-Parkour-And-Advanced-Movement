@@ -2,7 +2,7 @@ extends Move
 
 @export var ledge_sensor : RaySlice
 
-func map_input_actions(input : InputPackage):
+func map_custom_actions(input : InputPackage):
 	if input.input_actions.has("go_up"):
 		if area_awareness.search_for_climbable_edges(ledge_sensor):
 			input.move_names.append("ledge_climb_up")

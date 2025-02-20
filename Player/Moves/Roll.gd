@@ -28,8 +28,8 @@ func move_player(delta : float):
 # so maybe consuming them into base makes sense, but I really don't want another bool export field.
 # TODO revisit&rethink, tech debt certainly
 func on_enter_state(_input : InputPackage):
-	animator.reset_torso_animation()
-	animator.reset_legs_animation()
+	#animator.reset_torso_animation()
+	#animator.reset_legs_animation()
 	
 	var input = area_awareness.last_input_package
 	var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()

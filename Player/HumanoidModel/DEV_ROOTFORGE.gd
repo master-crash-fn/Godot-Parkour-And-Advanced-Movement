@@ -5,10 +5,48 @@ extends Node
 @onready var model = $".."
 
 func _ready():
+	#DEV_create_torso_bone_mask()
+	#DEV_create_legs_bone_mask()
 	#DEV_pin_ledge_animations()
 	#DEV_pin_root("ledge_climb_up_legs", "ledge_climb_up_params", Vector3(0, 0.894, 0.026))
 	#DEV_nail_z_coordinate("beam_fall_right_legs", "beam_fall_params", -0.062)
 	pass
+
+
+#func DEV_create_torso_bone_mask():
+	#var torso_bone_list = get_torso_bones_indeces(%GeneralSkeleton)
+	#var wrapper : SkeletonMask = SkeletonMask.new()
+	#wrapper.bones = torso_bone_list
+	#ResourceSaver.save(wrapper, "res://Player/SkeletonModifiers/" + "torso_bones.res")
+#
+#func DEV_create_legs_bone_mask():
+	#var legs_bone_list = get_legs_bones_indeces(%GeneralSkeleton)
+	#var wrapper : SkeletonMask = SkeletonMask.new()
+	#wrapper.bones = legs_bone_list
+	#ResourceSaver.save(wrapper, "res://Player/SkeletonModifiers/" + "legs_bones.res")
+#
+#
+func get_torso_bones_indeces(skeleton : Skeleton3D) -> Array:
+	return get_hierarchy_indexes(skeleton, skeleton.find_bone("Spine"))
+
+
+func get_legs_bones_indeces(skeleton : Skeleton3D) -> Array:
+	var right_leg_indeces = get_hierarchy_indexes(skeleton, skeleton.find_bone("RightUpperLeg"))
+	var left_leg_indeces = get_hierarchy_indexes(skeleton, skeleton.find_bone("LeftUpperLeg"))
+	var result = [0] # Hips
+	result.append_array(right_leg_indeces)
+	result.append_array(left_leg_indeces)
+	return result
+
+
+func get_hierarchy_indexes(skeleton : Skeleton3D, root_idx : int) -> Array:
+	var indeсes = []
+	for child_bone in skeleton.get_bone_children(root_idx):
+		indeсes.append_array(get_hierarchy_indexes(skeleton, child_bone)) 
+	indeсes.append(root_idx)
+	indeсes.sort()
+	return indeсes
+
 
 #DEVELOPMENT LEAYER FUNCTIONAL, IT DOES MODIFY ASSETS, UNCOMMENT IF YOU KNOW WHAT YOU ARE DOING
 #AND DID BACKUPS
