@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://drjqcoul7pinv"]
 
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_1ax3b"]
+[ext_resource type="Script" uid="uid://chdnbabniee68" path="res://Player/Player.gd" id="1_1ax3b"]
 [ext_resource type="PackedScene" uid="uid://dkl1i7wju7vba" path="res://Player/Visuals/PlayerVisuals.tscn" id="2_yjnpd"]
 [ext_resource type="PackedScene" uid="uid://eec5ujuowf51" path="res://Player/HumanoidModel/HumanoidModel.tscn" id="3_b4ws5"]
-[ext_resource type="Script" path="res://Player/Input/Input.gd" id="4_k1mdb"]
-[ext_resource type="Script" path="res://Player/Camera.gd" id="5_5e7cy"]
+[ext_resource type="Script" uid="uid://cquno0ugfo5db" path="res://Player/Input/Input.gd" id="4_k1mdb"]
+[ext_resource type="Script" uid="uid://bhj1352g4sox1" path="res://Player/Camera.gd" id="5_5e7cy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
 radius = 0.2

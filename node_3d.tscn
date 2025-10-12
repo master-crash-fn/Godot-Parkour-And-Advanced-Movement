@@ -2345,12 +2345,12 @@ tracks/73/keys = PackedFloat32Array(0, 1, 1.49012e-08, 1.49012e-08, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yo6yf"]
 _data = {
-"Armature|hgfhf|Anima_Layer": SubResource("Animation_ikb1m"),
-"dance": SubResource("Animation_850yl"),
-"idle_longsword_legs": ExtResource("1_hq56a"),
-"jump_run": SubResource("Animation_uq5nc"),
-"jump_sprint": SubResource("Animation_ngprb"),
-"walk_legs": ExtResource("2_4pk0c")
+&"Armature|hgfhf|Anima_Layer": SubResource("Animation_ikb1m"),
+&"dance": SubResource("Animation_850yl"),
+&"idle_longsword_legs": ExtResource("1_hq56a"),
+&"jump_run": SubResource("Animation_uq5nc"),
+&"jump_sprint": SubResource("Animation_ngprb"),
+&"walk_legs": ExtResource("2_4pk0c")
 }
 
 [node name="Node3D" type="Node3D"]

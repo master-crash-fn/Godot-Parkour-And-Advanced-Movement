@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://duuny6lcr46ol"]
+
+[ext_resource type="PackedScene" uid="uid://chb5s4sl5lqv0" path="res://level/mansion.tscn" id="1_bswci"]
+[ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="2_rus8k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xbjy"]
+albedo_color = Color(1, 0.113725, 1, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bswci"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_t1f0q"]
+sky_material = SubResource("ProceduralSkyMaterial_bswci")
+
+[sub_resource type="Environment" id="Environment_rus8k"]
+background_mode = 2
+sky = SubResource("Sky_t1f0q")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="level1" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_bswci")]
+
+[node name="Player" parent="." instance=ExtResource("2_rus8k")]
+transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, -20.8537, 3.11006, -10.3628)
+
+[node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_5xbjy")
+radius = 0.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rus8k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.875464, 0.390984, 0.284066, 0, -0.587785, 0.809017, 0.483282, 0.708266, 0.514585, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.511878, 0.859058, 0, -0.859058, 0.511878, 0, 7.65111, -6.09804)

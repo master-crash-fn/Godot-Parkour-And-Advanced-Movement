@@ -1,21 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=16 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://Assets/Textures/texture_09.png" id="3_ruxjn"]
 [ext_resource type="PackedScene" uid="uid://bv646civv7b6f" path="res://Locations/MarkedLedge.tscn" id="4_00fd4"]
 [ext_resource type="PackedScene" uid="uid://m4d0u4x4rby6" path="res://Locations/ProtoBeam.tscn" id="4_bupgl"]
+[ext_resource type="PackedScene" uid="uid://chb5s4sl5lqv0" path="res://level/mansion.tscn" id="6_wuwq4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_t1f0q"]
+[sub_resource type="Sky" id="Sky_jj4la"]
 sky_material = SubResource("ProceduralSkyMaterial_jw8o1")
 
 [sub_resource type="Environment" id="Environment_8ihuv"]
 background_mode = 2
-sky = SubResource("Sky_t1f0q")
+sky = SubResource("Sky_jj4la")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -180,3 +181,6 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 8.75443e-08, 1, -1.11759e-
 
 [node name="end" type="Node3D" parent="ProtoBeam"]
 transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-08, 3.8743e-07, 2.23517e-08, 1, 4.0702, 0.0996771, -0.00278711)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("6_wuwq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, -10)

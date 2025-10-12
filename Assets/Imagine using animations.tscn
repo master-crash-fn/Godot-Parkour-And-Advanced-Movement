@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ce3m4bc1d5m4f"]
 
-[ext_resource type="Script" path="res://Node3D.gd" id="1_h2p0n"]
+[sub_resource type="Resource" id="Resource_rwpy8"]
+metadata/__load_path__ = "res://Node3D.gd"
 
 [sub_resource type="Animation" id="Animation_h7hfl"]
 resource_name = "heavy_attack"
@@ -123,12 +124,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_snhwk"]
 _data = {
-"heavy_attack": SubResource("Animation_h7hfl"),
-"very_important_ingame_logic": SubResource("Animation_rj46x")
+&"heavy_attack": SubResource("Animation_h7hfl"),
+&"very_important_ingame_logic": SubResource("Animation_rj46x")
 }
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_h2p0n")
+script = SubResource("Resource_rwpy8")
 very_important_game_flag = true
 weapon_deals_damage = true
 

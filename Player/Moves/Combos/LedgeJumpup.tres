@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpatialMoveset" load_steps=2 format=3 uid="uid://ba0aul32qq0lg"]
 
-[ext_resource type="Script" path="res://Player/Moves/Combos/SpatialMoveset.gd" id="1_84spa"]
+[ext_resource type="Script" uid="uid://yxhjuph78mqh" path="res://Player/Moves/Combos/SpatialMoveset.gd" id="1_84spa"]
 
 [resource]
 script = ExtResource("1_84spa")

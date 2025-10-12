@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://nqsll4tk18lk"
+path.s3tc="res://.godot/imported/tanabata_evening_-_kyoto_inspired_city_scene_62.png-949c94f5c9c38a5426826cdde6aa1738.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "7bd7e734d2278395dfa7360035a4aef9"
+}
+
+[deps]
+
+source_file="res://map/tanabata_evening_-_kyoto_inspired_city_scene_62.png"
+dest_files=["res://.godot/imported/tanabata_evening_-_kyoto_inspired_city_scene_62.png-949c94f5c9c38a5426826cdde6aa1738.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

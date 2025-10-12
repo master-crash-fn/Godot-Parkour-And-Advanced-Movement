@@ -1,27 +1,27 @@
 [gd_scene load_steps=105 format=3 uid="uid://eec5ujuowf51"]
 
-[ext_resource type="Script" path="res://Player/HumanoidModel/Model.gd" id="1_mokw1"]
+[ext_resource type="Script" uid="uid://smgtcdlcw0b1" path="res://Player/HumanoidModel/Model.gd" id="1_mokw1"]
 [ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://Assets/Ready Animations/jump_sprint.res" id="2_gpv2h"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/DEV_ROOTFORGE.gd" id="2_uavh5"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/Resources.gd" id="2_v2u5j"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/Combat.gd" id="2_vd0q8"]
+[ext_resource type="Script" uid="uid://caygl3bo8jqe7" path="res://Player/HumanoidModel/DEV_ROOTFORGE.gd" id="2_uavh5"]
+[ext_resource type="Script" uid="uid://blwexh8xvq0q8" path="res://Player/HumanoidModel/Resources.gd" id="2_v2u5j"]
+[ext_resource type="Script" uid="uid://bn2u1j0vi8wm4" path="res://Player/HumanoidModel/Combat.gd" id="2_vd0q8"]
 [ext_resource type="Animation" uid="uid://bf1d4282m1ryw" path="res://Assets/Ready Animations/jump_run.res" id="3_b4ydi"]
 [ext_resource type="Animation" uid="uid://cvpiiqokxohra" path="res://Assets/Ready Animations/dance.res" id="4_jp0p3"]
 [ext_resource type="Animation" uid="uid://cjry5u8re5msd" path="res://Assets/Ready Animations/landing_sprint.res" id="5_5qtfv"]
 [ext_resource type="Animation" uid="uid://dcklgh1qspg7t" path="res://Assets/Ready Animations/landing_run.res" id="6_a8yes"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/Legs.gd" id="6_wsqid"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/AreaAwareness.gd" id="7_afbqj"]
-[ext_resource type="Script" path="res://Player/Moves/Legs/WalkableGesture.gd" id="7_ng023"]
+[ext_resource type="Script" uid="uid://blr01rra8eehi" path="res://Player/HumanoidModel/Legs.gd" id="6_wsqid"]
+[ext_resource type="Script" uid="uid://blxj5h3is4uos" path="res://Player/HumanoidModel/AreaAwareness.gd" id="7_afbqj"]
+[ext_resource type="Script" uid="uid://p2jaqmbbp6e" path="res://Player/Moves/Legs/WalkableGesture.gd" id="7_ng023"]
 [ext_resource type="Animation" uid="uid://bll6etjl7wd6m" path="res://Assets/Ready Animations/midair.res" id="7_r762r"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/SkeletonAnimator.gd" id="8_5xwyl"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/SplitBodyAnimator.gd" id="8_7fd2c"]
-[ext_resource type="Script" path="res://Player/Moves/Legs/SprintableAction.gd" id="8_f0bal"]
+[ext_resource type="Script" uid="uid://bg25s1lxrusxs" path="res://Player/HumanoidModel/SkeletonAnimator.gd" id="8_5xwyl"]
+[ext_resource type="Script" uid="uid://cnqll2b5am1ua" path="res://Player/HumanoidModel/SplitBodyAnimator.gd" id="8_7fd2c"]
+[ext_resource type="Script" uid="uid://cxk1uloggrsov" path="res://Player/Moves/Legs/SprintableAction.gd" id="8_f0bal"]
 [ext_resource type="AnimationLibrary" uid="uid://cy0hk63isyxfo" path="res://Assets/Ready Animations/torso_controller_lib.res" id="9_v0sfg"]
 [ext_resource type="Animation" uid="uid://cmcjn7n1ht11v" path="res://Assets/Ready Animations/stagger.res" id="12_40573"]
 [ext_resource type="PackedScene" uid="uid://6t1bl235yea4" path="res://Weapons/Models/Sword.tscn" id="12_km6ig"]
 [ext_resource type="Animation" uid="uid://d1uw7j630aje1" path="res://Assets/Ready Animations/mixamo_legs_animations/walk_legs.res" id="12_qn0gm"]
 [ext_resource type="Animation" uid="uid://bvr3qpwont18" path="res://Assets/Ready Animations/mixamo_legs_animations/idle_longsword_legs.res" id="12_v5gne"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/HumanoidHitbox.gd" id="13_etasb"]
+[ext_resource type="Script" uid="uid://yqgicm38p16x" path="res://Player/HumanoidModel/HumanoidHitbox.gd" id="13_etasb"]
 [ext_resource type="Animation" uid="uid://jyjqrq6kiasc" path="res://Assets/Ready Animations/parry.res" id="13_jsfsu"]
 [ext_resource type="Animation" uid="uid://dho7uykss61yg" path="res://Assets/Ready Animations/parried.res" id="14_vnm0i"]
 [ext_resource type="Animation" uid="uid://bpleguxlfnalq" path="res://Assets/Ready Animations/mixamo_legs_animations/jump_wall_legs.res" id="14_yiffp"]
@@ -40,32 +40,32 @@
 [ext_resource type="Animation" uid="uid://dpgnp2nh3u8xe" path="res://Assets/Ready Animations/ledge_climb_up_legs_ROOT_PINNED.res" id="19_s7slm"]
 [ext_resource type="Animation" uid="uid://trt0npr4vrtg" path="res://Assets/Ready Animations/mixamo_legs_animations/ledge_climb_up_legs.res" id="19_vbfw4"]
 [ext_resource type="Animation" uid="uid://dhghfp5evtdy0" path="res://Assets/Ready Animations/idle_longsword.res" id="21_2ollm"]
-[ext_resource type="Script" path="res://Player/Moves/Walk.gd" id="22_v2ie3"]
+[ext_resource type="Script" uid="uid://7og4bn2vuqk5" path="res://Player/Moves/Walk.gd" id="22_v2ie3"]
 [ext_resource type="Animation" uid="uid://cdqyr4vcns7am" path="res://Assets/Ready Animations/longsword_Z_PROJECTED.res" id="23_toe8w"]
 [ext_resource type="Animation" uid="uid://kux8ogygvefj" path="res://Assets/Ready Animations/longsword_2_Z_PROJECTED.res" id="25_eky8q"]
-[ext_resource type="Script" path="res://Player/Moves/Block.gd" id="28_8vret"]
+[ext_resource type="Script" uid="uid://ddko3wq0jsgu0" path="res://Player/Moves/Block.gd" id="28_8vret"]
 [ext_resource type="Resource" uid="uid://ba0aul32qq0lg" path="res://Player/Moves/Combos/LedgeJumpup.tres" id="28_g01sg"]
-[ext_resource type="Script" path="res://Player/Moves/Roll.gd" id="29_824ux"]
+[ext_resource type="Script" uid="uid://ikornofj717r" path="res://Player/Moves/Roll.gd" id="29_824ux"]
 [ext_resource type="PackedScene" uid="uid://cvubc08qnq2y" path="res://Player/HumanoidModel/HumanoidStates.tscn" id="30_xkqvj"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/MovesData.gd" id="31_l4eyu"]
-[ext_resource type="Script" path="res://Player/HumanoidModel/MovesDataStorage.gd" id="32_yw3h7"]
-[ext_resource type="Script" path="res://Player/Moves/Idle.gd" id="33_8hd6j"]
-[ext_resource type="Script" path="res://Player/Moves/WallJump.gd" id="34_j7qsy"]
-[ext_resource type="Script" path="res://Player/Moves/Run.gd" id="35_61fud"]
-[ext_resource type="Script" path="res://Player/Moves/BeamForward.gd" id="35_quvw8"]
-[ext_resource type="Script" path="res://Player/Moves/Sprint.gd" id="36_ep40x"]
-[ext_resource type="Script" path="res://Player/Moves/LedgeGrab.gd" id="37_8sgsk"]
-[ext_resource type="Script" path="res://Player/Moves/LedgeClimbUp.gd" id="37_pmu8v"]
-[ext_resource type="Script" path="res://Player/Moves/JumpRun.gd" id="37_x72nu"]
-[ext_resource type="Script" path="res://Player/Moves/Combos/Combo.gd" id="38_g0o4h"]
-[ext_resource type="Script" path="res://Player/Moves/JumpSprint.gd" id="38_jhd3k"]
-[ext_resource type="Script" path="res://Player/Moves/Combos/ConsecutiveAttack.gd" id="39_4w3p0"]
-[ext_resource type="Script" path="res://Player/Moves/Midair.gd" id="39_gdq10"]
-[ext_resource type="Script" path="res://Player/Moves/LandingRun.gd" id="40_j5e1a"]
-[ext_resource type="Script" path="res://Player/Moves/LandingSprint.gd" id="41_3f8xp"]
+[ext_resource type="Script" uid="uid://d1a41ucngs64c" path="res://Player/HumanoidModel/MovesData.gd" id="31_l4eyu"]
+[ext_resource type="Script" uid="uid://dgdr02pq5ytf7" path="res://Player/HumanoidModel/MovesDataStorage.gd" id="32_yw3h7"]
+[ext_resource type="Script" uid="uid://21bx4xgx5kwe" path="res://Player/Moves/Idle.gd" id="33_8hd6j"]
+[ext_resource type="Script" uid="uid://bgbh3qirdrm8y" path="res://Player/Moves/WallJump.gd" id="34_j7qsy"]
+[ext_resource type="Script" uid="uid://b5hv3lh8o5cus" path="res://Player/Moves/Run.gd" id="35_61fud"]
+[ext_resource type="Script" uid="uid://daur2xi1rrubx" path="res://Player/Moves/BeamForward.gd" id="35_quvw8"]
+[ext_resource type="Script" uid="uid://6i11t40ei2kh" path="res://Player/Moves/Sprint.gd" id="36_ep40x"]
+[ext_resource type="Script" uid="uid://boo6yahnxftvi" path="res://Player/Moves/LedgeGrab.gd" id="37_8sgsk"]
+[ext_resource type="Script" uid="uid://bxw8hb8w15x1s" path="res://Player/Moves/LedgeClimbUp.gd" id="37_pmu8v"]
+[ext_resource type="Script" uid="uid://dixl3ki8l54kb" path="res://Player/Moves/JumpRun.gd" id="37_x72nu"]
+[ext_resource type="Script" uid="uid://cdqje5ota1240" path="res://Player/Moves/Combos/Combo.gd" id="38_g0o4h"]
+[ext_resource type="Script" uid="uid://bdunqpgek1q2g" path="res://Player/Moves/JumpSprint.gd" id="38_jhd3k"]
+[ext_resource type="Script" uid="uid://div8tumkj8awb" path="res://Player/Moves/Combos/ConsecutiveAttack.gd" id="39_4w3p0"]
+[ext_resource type="Script" uid="uid://d0mt3nn8bknhm" path="res://Player/Moves/Midair.gd" id="39_gdq10"]
+[ext_resource type="Script" uid="uid://brribbgur46gd" path="res://Player/Moves/LandingRun.gd" id="40_j5e1a"]
+[ext_resource type="Script" uid="uid://poqitg2md3gm" path="res://Player/Moves/LandingSprint.gd" id="41_3f8xp"]
 [ext_resource type="Resource" uid="uid://cwtbyxb7n5v2g" path="res://Player/Moves/Combos/Spatial.tres" id="41_20frx"]
 [ext_resource type="PackedScene" uid="uid://d4bm1ogsxjkhx" path="res://Player/Moves/Attack.tscn" id="42_bnot5"]
-[ext_resource type="Script" path="res://Player/Moves/Staggered.gd" id="46_ywhv4"]
+[ext_resource type="Script" uid="uid://d0qpa7rbfw2k1" path="res://Player/Moves/Staggered.gd" id="46_ywhv4"]
 [ext_resource type="Animation" uid="uid://djdnjveginvcr" path="res://Assets/Ready Animations/mixamo_torso_animations/ledge_climb_up_torso.res" id="61_ky5gk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agkpj"]
@@ -1902,39 +1902,39 @@ tracks/9/keys = PackedFloat32Array(0, 1, 9.82735e-08, 0.999933, 0.0115533, -2.53
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4bw1v"]
 _data = {
-"TPose_legs": SubResource("Animation_tv155"),
-"beam_fall_left_legs": ExtResource("19_3ixvf"),
-"beam_fall_right_legs": ExtResource("18_l8u8u"),
-"block_reaction_legs": SubResource("Animation_fwiyk"),
-"dance_legs": SubResource("Animation_4gciy"),
-"death_legs": SubResource("Animation_aqhco"),
-"idle_legs": SubResource("Animation_3u51o"),
-"idle_longsword_legs": ExtResource("12_v5gne"),
-"idle_warrior_legs": SubResource("Animation_u2hvf"),
-"jump_run_legs": SubResource("Animation_dpa0b"),
-"jump_sprint_legs": SubResource("Animation_x586q"),
-"jump_wall_legs": ExtResource("15_dfux6"),
-"landing_run_legs": SubResource("Animation_x73i5"),
-"landing_sprint_legs": SubResource("Animation_4ubqp"),
-"ledge_climb_up_legs": ExtResource("19_s7slm"),
-"ledge_idle_legs": ExtResource("17_li6d4"),
-"longsword_1_legs": SubResource("Animation_k765i"),
-"longsword_2_legs": SubResource("Animation_uktap"),
-"midair_legs": SubResource("Animation_3bi86"),
-"parried_legs": SubResource("Animation_dqo2o"),
-"parry_legs": SubResource("Animation_cr8k3"),
-"pushback_legs": SubResource("Animation_fn2m7"),
-"riposte_legs": SubResource("Animation_5fenu"),
-"roll_legs": SubResource("Animation_ec747"),
-"rope_walk_backward_legs": ExtResource("15_x0mok"),
-"rope_walk_forward_legs": ExtResource("16_c5hy8"),
-"run_legs": SubResource("Animation_mwuk3"),
-"slash_3_legs": SubResource("Animation_kfppm"),
-"sprint_legs": SubResource("Animation_pley8"),
-"staggered_legs": SubResource("Animation_oyodi"),
-"walk_legs": ExtResource("12_qn0gm"),
-"weapon_block_legs": SubResource("Animation_8pmmr"),
-"withdraw_legs": SubResource("Animation_k4daf")
+&"TPose_legs": SubResource("Animation_tv155"),
+&"beam_fall_left_legs": ExtResource("19_3ixvf"),
+&"beam_fall_right_legs": ExtResource("18_l8u8u"),
+&"block_reaction_legs": SubResource("Animation_fwiyk"),
+&"dance_legs": SubResource("Animation_4gciy"),
+&"death_legs": SubResource("Animation_aqhco"),
+&"idle_legs": SubResource("Animation_3u51o"),
+&"idle_longsword_legs": ExtResource("12_v5gne"),
+&"idle_warrior_legs": SubResource("Animation_u2hvf"),
+&"jump_run_legs": SubResource("Animation_dpa0b"),
+&"jump_sprint_legs": SubResource("Animation_x586q"),
+&"jump_wall_legs": ExtResource("15_dfux6"),
+&"landing_run_legs": SubResource("Animation_x73i5"),
+&"landing_sprint_legs": SubResource("Animation_4ubqp"),
+&"ledge_climb_up_legs": ExtResource("19_s7slm"),
+&"ledge_idle_legs": ExtResource("17_li6d4"),
+&"longsword_1_legs": SubResource("Animation_k765i"),
+&"longsword_2_legs": SubResource("Animation_uktap"),
+&"midair_legs": SubResource("Animation_3bi86"),
+&"parried_legs": SubResource("Animation_dqo2o"),
+&"parry_legs": SubResource("Animation_cr8k3"),
+&"pushback_legs": SubResource("Animation_fn2m7"),
+&"riposte_legs": SubResource("Animation_5fenu"),
+&"roll_legs": SubResource("Animation_ec747"),
+&"rope_walk_backward_legs": ExtResource("15_x0mok"),
+&"rope_walk_forward_legs": ExtResource("16_c5hy8"),
+&"run_legs": SubResource("Animation_mwuk3"),
+&"slash_3_legs": SubResource("Animation_kfppm"),
+&"sprint_legs": SubResource("Animation_pley8"),
+&"staggered_legs": SubResource("Animation_oyodi"),
+&"walk_legs": ExtResource("12_qn0gm"),
+&"weapon_block_legs": SubResource("Animation_8pmmr"),
+&"withdraw_legs": SubResource("Animation_k4daf")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47cuq"]
@@ -4449,35 +4449,35 @@ tracks/71/keys = PackedFloat32Array(0, 1, 1.49012e-08, 1.49012e-08, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3o6mw"]
 _data = {
-"TPose": SubResource("Animation_k5lpg"),
-"awaiting_ripost": ExtResource("15_auxh7"),
-"beam_fall_left_legs": ExtResource("19_3ixvf"),
-"beam_fall_right_legs": ExtResource("18_l8u8u"),
-"dance": ExtResource("4_jp0p3"),
-"death": ExtResource("18_gesqm"),
-"idle": SubResource("Animation_k577b"),
-"idle_longsword": ExtResource("21_2ollm"),
-"idle_shield": ExtResource("19_ht3tf"),
-"idle_warrior": ExtResource("15_1fpl4"),
-"jump_run": ExtResource("3_b4ydi"),
-"jump_sprint": ExtResource("2_gpv2h"),
-"jump_wall_legs": ExtResource("14_yiffp"),
-"landing_run": ExtResource("6_a8yes"),
-"landing_sprint": ExtResource("5_5qtfv"),
-"ledge_climb_up_legs": ExtResource("19_vbfw4"),
-"ledge_climb_up_torso": ExtResource("61_ky5gk"),
-"longsword_1": ExtResource("23_toe8w"),
-"longsword_2": ExtResource("25_eky8q"),
-"midair": ExtResource("7_r762r"),
-"parried": ExtResource("14_vnm0i"),
-"parry": ExtResource("13_jsfsu"),
-"riposte": ExtResource("16_x6434"),
-"rope_walk_backward_legs": ExtResource("15_x0mok"),
-"rope_walk_forward_legs": ExtResource("16_c5hy8"),
-"run": SubResource("Animation_tlquh"),
-"slash_3": SubResource("Animation_kbxkj"),
-"sprint": SubResource("Animation_rvpwv"),
-"staggered": ExtResource("12_40573")
+&"TPose": SubResource("Animation_k5lpg"),
+&"awaiting_ripost": ExtResource("15_auxh7"),
+&"beam_fall_left_legs": ExtResource("19_3ixvf"),
+&"beam_fall_right_legs": ExtResource("18_l8u8u"),
+&"dance": ExtResource("4_jp0p3"),
+&"death": ExtResource("18_gesqm"),
+&"idle": SubResource("Animation_k577b"),
+&"idle_longsword": ExtResource("21_2ollm"),
+&"idle_shield": ExtResource("19_ht3tf"),
+&"idle_warrior": ExtResource("15_1fpl4"),
+&"jump_run": ExtResource("3_b4ydi"),
+&"jump_sprint": ExtResource("2_gpv2h"),
+&"jump_wall_legs": ExtResource("14_yiffp"),
+&"landing_run": ExtResource("6_a8yes"),
+&"landing_sprint": ExtResource("5_5qtfv"),
+&"ledge_climb_up_legs": ExtResource("19_vbfw4"),
+&"ledge_climb_up_torso": ExtResource("61_ky5gk"),
+&"longsword_1": ExtResource("23_toe8w"),
+&"longsword_2": ExtResource("25_eky8q"),
+&"midair": ExtResource("7_r762r"),
+&"parried": ExtResource("14_vnm0i"),
+&"parry": ExtResource("13_jsfsu"),
+&"riposte": ExtResource("16_x6434"),
+&"rope_walk_backward_legs": ExtResource("15_x0mok"),
+&"rope_walk_forward_legs": ExtResource("16_c5hy8"),
+&"run": SubResource("Animation_tlquh"),
+&"slash_3": SubResource("Animation_kbxkj"),
+&"sprint": SubResource("Animation_rvpwv"),
+&"staggered": ExtResource("12_40573")
 }
 
 [node name="Model" type="Node3D"]
