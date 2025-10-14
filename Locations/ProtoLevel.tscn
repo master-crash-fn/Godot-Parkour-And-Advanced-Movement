@@ -71,9 +71,6 @@ visible = false
 material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.511878, 0.859058, 0, -0.859058, 0.511878, 0, 7.65111, -6.09804)
-
 [node name="Box1" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90411, 0.5, 1.79941)
 material_override = SubResource("StandardMaterial3D_2bmwg")
@@ -183,4 +180,6 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 8.75443e-08, 1, -1.11759e-
 transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-08, 3.8743e-07, 2.23517e-08, 1, 4.0702, 0.0996771, -0.00278711)
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("6_wuwq4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.88715, -1.9073486e-06, -10.094517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8872, -1.90735e-06, -10.0945)
+
+[editable path="Player"]
