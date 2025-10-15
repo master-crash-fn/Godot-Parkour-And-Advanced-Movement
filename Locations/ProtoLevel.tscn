@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=17 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bv646civv7b6f" path="res://Locations/MarkedLedge.tscn" id="4_00fd4"]
 [ext_resource type="PackedScene" uid="uid://m4d0u4x4rby6" path="res://Locations/ProtoBeam.tscn" id="4_bupgl"]
 [ext_resource type="PackedScene" uid="uid://chb5s4sl5lqv0" path="res://level/mansion.tscn" id="6_wuwq4"]
+[ext_resource type="PackedScene" uid="uid://h5shhsc4g17c" path="res://scenes/hot air balloon.tscn" id="7_dihxg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -63,7 +64,7 @@ collision_layer = 3
 size = Vector3(50, 1, 30)
 
 [node name="Player" parent="." instance=ExtResource("1_86wwi")]
-transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, -20.8537, 9.11006, -12.3628)
+transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, 64.756, 67.8944, -21.3075)
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
@@ -102,7 +103,7 @@ collision_layer = 3
 size = Vector3(2, 10, 2)
 
 [node name="Box7" type="CSGBox3D" parent="."]
-transform = Transform3D(0.999998, 2.07871e-06, 0, -2.07871e-06, 0.999998, 0, 0, 0, 1, -13.7228, 4.46707, -14.7058)
+transform = Transform3D(0.999998, 2.07871e-06, 0, -2.07871e-06, 0.999998, 0, 0, 0, 1, -13.7228, 4.47378, -14.5956)
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
@@ -181,5 +182,8 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("6_wuwq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8872, -1.90735e-06, -10.0945)
+
+[node name="hot air balloon" parent="." instance=ExtResource("7_dihxg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7776, 66.9212, -21.4747)
 
 [editable path="Player"]
