@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=18 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://m4d0u4x4rby6" path="res://Locations/ProtoBeam.tscn" id="4_bupgl"]
 [ext_resource type="PackedScene" uid="uid://chb5s4sl5lqv0" path="res://level/mansion.tscn" id="6_wuwq4"]
 [ext_resource type="PackedScene" uid="uid://h5shhsc4g17c" path="res://scenes/hot air balloon.tscn" id="7_dihxg"]
+[ext_resource type="PackedScene" uid="uid://gbgmesog7t73" path="res://Assets/cityding.tscn" id="8_5x1dm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -185,5 +186,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8872, -1.90735e-06, -10.09
 
 [node name="hot air balloon" parent="." instance=ExtResource("7_dihxg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7776, 66.9212, -21.4747)
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("8_5x1dm")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 105.993, -4.01133, -8.55781)
 
 [editable path="Player"]
