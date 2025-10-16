@@ -65,7 +65,7 @@ collision_layer = 3
 size = Vector3(50, 1, 30)
 
 [node name="Player" parent="." instance=ExtResource("1_86wwi")]
-transform = Transform3D(0.000680641, 0, 1, 0, 1, 0, -1, 0, 0.000680641, 64.756, 67.8944, -21.3075)
+transform = Transform3D(0.0243101, 0, -0.999705, 0, 1, 0, 0.999705, 0, 0.0243101, 65.5345, 67.7919, -21.3075)
 
 [node name="player_debug_sphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
@@ -185,9 +185,9 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8872, -1.90735e-06, -10.0945)
 
 [node name="hot air balloon" parent="." instance=ExtResource("7_dihxg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7776, 66.9212, -21.4747)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 64.7776, 67.448, -21.4747)
 
-[node name="Sketchfab_Scene2" parent="." instance=ExtResource("8_5x1dm")]
+[node name="city" parent="." instance=ExtResource("8_5x1dm")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 105.993, -4.01133, -8.55781)
 
 [editable path="Player"]
