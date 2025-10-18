@@ -125,7 +125,7 @@ collision_layer = 3
 size = Vector3(2, 10, 2)
 
 [node name="Box5" type="CSGBox3D" parent="Box5"]
-transform = Transform3D(0.999999, 6.92904e-07, 0, -6.92904e-07, 0.999999, 0, 0, 0, 1, 9.83251, -4.35941, 8.13815)
+transform = Transform3D(0.999851, -0.0171899, 0, 0.0171899, 0.999851, 0, 0, 0, 1, 9.83251, -4.35941, 8.13815)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
