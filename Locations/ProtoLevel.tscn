@@ -183,4 +183,4 @@ transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 8.75443e-08, 1, -1.11759e-
 transform = Transform3D(1, 1.11759e-08, -1.49012e-07, 6.51926e-08, 1, -1.11759e-08, 3.8743e-07, 2.23517e-08, 1, 4.0702, 0.0996771, -0.00278711)
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("6_wuwq4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.88715, -1.9073486e-06, -10.094517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8872, -1.90735e-06, -10.0945)

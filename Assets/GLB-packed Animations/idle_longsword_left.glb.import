@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://spe2n4un1007"
+uid="uid://cat1hxus5csai"
 path="res://.godot/imported/idle_longsword_left.glb-e30333b9d588ad214c86771d22781c6b.scn"
 
 [deps]
@@ -15,11 +15,9 @@ dest_files=["res://.godot/imported/idle_longsword_left.glb-e30333b9d588ad214c867
 
 nodes/root_type=""
 nodes/root_name=""
-nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
-nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -34,18 +32,6 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-materials/extract=0
-materials/extract_format=0
-materials/extract_path=""
-_subresources={
-"nodes": {
-"PATH:Armature/Skeleton3D": {
-"retarget/bone_map": Resource("uid://jsmvf7l3e2tg", "res://Assets/GLB-packed Animations/Mixamo BoneMap.tres")
-},
-"PATH:cs_grp": {
-"import/skip_import": true
-}
-}
-}
-gltf/naming_version=1
+_subresources={}
+gltf/naming_version=0
 gltf/embedded_image_handling=1
