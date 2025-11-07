@@ -190,4 +190,11 @@ transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 64.7776, 67.448, -21.47
 [node name="city" parent="." instance=ExtResource("8_5x1dm")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 105.993, -4.01133, -8.55781)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.3729, -4, 15.9499)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+size = Vector3(2, 2, 2)
+
 [editable path="Player"]
