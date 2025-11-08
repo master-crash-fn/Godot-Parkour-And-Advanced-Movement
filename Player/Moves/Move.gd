@@ -65,6 +65,11 @@ func check_combos(input : InputPackage):
 
 
 func best_input_that_can_be_paid(input : InputPackage) -> String:
+	# Filter out jump moves if not on floor (prevents jump animation on ramps)
+	if not area_awareness.is_on_floor():
+		input.actions.erase("jump_run")
+		input.actions.erase("jump_sprint")
+	
 	input.actions.sort_custom(container.moves_priority_sort)
 	for action in input.actions:
 		if resources.can_be_paid(container.moves[action]):

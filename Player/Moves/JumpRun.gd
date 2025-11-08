@@ -31,4 +31,10 @@ func process_jump():
 
 
 func on_enter_state():
+	# Prevent jumping if not on floor (e.g., when walking up ramps)
+	# This is a safety check - the main prevention is in Move.best_input_that_can_be_paid()
+	if not area_awareness.is_on_floor():
+		# Don't set velocity, which will cause issues, but the state switch already happened
+		# The best_input_that_can_be_paid() fix should prevent this from being reached
+		return
 	player.velocity = player.velocity.normalized() * SPEED 
