@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=19 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://Player/Player.tscn" id="1_86wwi"]
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://Assets/Textures/texture_07.png" id="1_m20ri"]
@@ -47,6 +47,9 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5x1dm"]
+size = Vector3(0.495239, 0.977722, 1.31738)
 
 [node name="ProtoLevel" type="Node3D"]
 
@@ -196,5 +199,20 @@ use_collision = true
 collision_layer = 17
 collision_mask = 17
 size = Vector3(2, 2, 2)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 105.993, -4.01133, -8.55781)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.802917, -0.343815, -0.486945, 0.40373, 0.914662, 0.0198921, 0.438551, -0.212566, 0.873206, -5.15157, 1.38236, -6.53274)
+shape = SubResource("BoxShape3D_5x1dm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.802917, -0.343815, -0.486945, 0.393637, 0.919266, 0, 0.447632, -0.19168, 0.873433, -4.70202, 1.50592, -6.24174)
+shape = SubResource("BoxShape3D_5x1dm")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.802917, -0.343815, -0.486945, 0.393637, 0.919266, 0, 0.447632, -0.19168, 0.873433, -4.16573, 1.62173, -5.94275)
+shape = SubResource("BoxShape3D_5x1dm")
 
 [editable path="Player"]
